@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc1dd91473cb4313be6a76edd8894b5b" Name="Diagram1">
+        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_DATA" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetsManagerModel.EQUIPMENT" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetsManagerModel.SUPPLIER" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetsManagerModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="7" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

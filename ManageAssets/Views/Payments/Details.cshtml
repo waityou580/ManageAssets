@@ -1,0 +1,131 @@
+﻿@model ManageAssets.Models.PAYMENT
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div><a href="@Url.Action("ExportCustomers")"> Report PDF </a></div>
+
+<div>
+    <h4>PAYMENT</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Invoice_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Invoice_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Billing_period)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Billing_period)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Payment_method)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Payment_method)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Units_used)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Units_used)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title_VN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title_VN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title_CN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title_CN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_VN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_VN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Content_CN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content_CN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Payment_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
