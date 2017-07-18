@@ -1,0 +1,9 @@
+﻿.panel-body{
+    font-size:15px;
+}
+.line{
+  border: 1px solid;
+  height: 45px;
+  margin-left: 0px;
+  padding:unset;
+}

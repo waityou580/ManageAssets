@@ -5,127 +5,285 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div><a href="@Url.Action("ExportCustomers")"> Report PDF </a></div>
 
-<div>
-    <h4>PAYMENT</h4>
+
+<form>
+    @Html.ActionLink("Report PDF", "ExportPdf",new { id = Model.Payment_ID}, new { @class = "btn btn-info" })
+    @Html.ActionLink("Report Excel", "ExportExcel", new { id = Model.Payment_ID }, new { @class = "btn btn-info" })
+
+    <br />
+    <h1>Application for payment</h1>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Payment_Date)
-        </dt>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Payment_Date)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Payment_Date)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Payment_Date)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Department)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Department)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Department)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Department)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Supplier_ID)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Supplier_ID)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Supplier_ID)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Supplier_ID)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Invoice_Date)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Invoice_Date)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Invoice_Date)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Invoice_Date)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Billing_period)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Billing_period)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Billing_period)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Billing_period)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Payment_method)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Payment_method)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Payment_method)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Payment_method)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Units_used)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Units_used)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Units_used)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Units_used)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title_VN)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title_VN)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title_VN)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title_VN)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title_CN)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title_CN)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title_CN)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title_CN)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content_VN)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Content_VN)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content_VN)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Content_VN)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content_CN)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Content_CN)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content_CN)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Content_CN)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VAT)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.VAT)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.VAT)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.VAT)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Amount)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Amount)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Payment_ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+            <dt>
+                @Html.DisplayNameFor(model => model.Currency)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Currency)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Payment_ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</form>
+
+@*<form class="form-horizontal">
+        <h1>Application for payment</h1>
+        <hr />
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Payment_Date)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Payment_Date)"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Department)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Department)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Supplier_ID)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Supplier_ID)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Invoice_Date)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Invoice_Date)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Billing_period)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Billing_period)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Payment_method)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Payment_method)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Units_used)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Units_used)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Title_VN)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Title_VN)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Title_CN)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Title_CN)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Content_VN)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Content_VN)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Content_CN)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Content_CN)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Price)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Price)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.VAT)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.VAT)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Amount)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Amount)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Currency)</label>
+            <div class="col-lg-10">
+                <input class="form-control" value="@Html.DisplayFor(model => model.Currency)" />
+            </div>
+        </div>
+    </form>*@
+
+
+@*<div class="row">
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <h3>PLUS ONE SPORTS責任有限公司</h3>
+            </div>
+            <div class="col-lg-12 text-center">
+                <h3>單 據 黏 存 單  * *  ĐƠN XIN THANH TOÁN</h3>
+            </div>
+            <div class="col-lg-12 text-center">
+                <p>請款日期 Ngày tháng:@Html.DisplayFor(model => model.Payment_Date)</p>
+            </div>
+            <div class="col-lg-12 ">
+                <div class="col-lg-2 text-center line">
+                    <p>Đơn vị <br /> 報銷單位</p>
+                </div>
+                <div class="col-lg-2 text-center line">
+                    <p>@Html.DisplayFor(model => model.Department)</p>
+                </div>
+                <div class="col-lg-2 text-center line">
+                    <p> Tên NCC<br /> 廠商</p>
+                </div>
+                <div class="col-lg-2 text-center line">
+                    <p>@Html.DisplayFor(model => model.Supplier_ID)</p>
+                </div>
+                <div class="col-lg-2 text-center line">
+                    <p>Ngày HĐ<br />發票日</p>
+                </div>
+                <div class="col-lg-2 text-center line">
+                    <p>@Html.DisplayFor(model => model.Invoice_Date)</p>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="col-lg-3 text-center line">
+                    <p>Thời hạn thanh toán 到期付款日</p>
+                </div>
+                <div class="col-lg-3 text-center line">
+                    <p>@Html.DisplayFor(model => model.Billing_period)</p>
+                </div>
+                <div class="col-lg-3 text-center line">
+                    <p>Phương thức TT 付款方式</p>
+                </div>
+                <div class="col-lg-3 text-center line">
+                    <p>@Html.DisplayFor(model => model.Payment_method)</p>
+                </div>
+            </div>
+        </div>
+    </div>*@
