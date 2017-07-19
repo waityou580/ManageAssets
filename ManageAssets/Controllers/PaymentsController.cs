@@ -8,6 +8,7 @@ using System.Net;
 using Rotativa;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
+using System.Globalization;
 
 namespace ManageAssets.Controllers
 {
@@ -37,6 +38,30 @@ namespace ManageAssets.Controllers
         // GET: Default/Create
         public ActionResult Create()
         {
+            var date = DateTime.Today;
+            var date1 = date.ToString("yyyy-MM-dd");
+            string paymentID;
+            try
+            {
+                var paymentDate = db.PAYMENTS.Where(p => p.Payment_Date.ToString() == date1).ToList();
+                paymentID = paymentDate.Select(p=>p.Payment_ID).Last();
+                paymentID = paymentID.Substring(9,3);
+                paymentID = (int.Parse(paymentID) + 1).ToString();
+                if(int.Parse(paymentID) < 10)
+                {
+                    paymentID = "00" + paymentID;
+                }if(int.Parse(paymentID) < 100 && int.Parse(paymentID) >= 10)
+                {
+                    paymentID = "0" + paymentID;
+                }
+                paymentID = "PAY" + date.ToString("yyMMdd") + paymentID;
+            }
+            catch
+            {
+                paymentID = "PAY" + date.ToString("yyMMdd") + "001";
+            }
+            ViewBag.AutoCode = paymentID;
+            ViewBag.DeptList = new SelectList(db.DEPARTMENTs,"DEPT_ID","DEPT_NAME");
             return View();
         }
 
@@ -78,19 +103,30 @@ namespace ManageAssets.Controllers
         }
 
         // GET: Default/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PAYMENT PAY = db.PAYMENTS.Find(id);
+            if (PAY == null)
+            {
+                return HttpNotFound();
+            }
+            return View(PAY);
         }
 
         // POST: Default/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                PAYMENT pay = db.PAYMENTS.Find(id);
+                db.PAYMENTS.Remove(pay);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

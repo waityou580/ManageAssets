@@ -31,6 +31,7 @@ namespace ManageAssets.Models
         public virtual DbSet<EQUIPMENT> EQUIPMENTs { get; set; }
         public virtual DbSet<SUPPLIER> SUPPLIERs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
         public virtual DbSet<PAYMENT> PAYMENTS { get; set; }
     }
 }

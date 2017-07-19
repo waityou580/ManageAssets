@@ -32,6 +32,14 @@
           <Property Name="EQUI_QUANTITY" Type="int" />
           <Property Name="EQUI_AMOUNT" Type="int" />
         </EntityType>
+        <EntityType Name="DEPARTMENT">
+          <Key>
+            <PropertyRef Name="DEPT_ID" />
+          </Key>
+          <Property Name="DEPT_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DEPT_NAME" Type="nvarchar" MaxLength="250" />
+          <Property Name="DEPT_NOTE" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="EQUIPMENT">
           <Key>
             <PropertyRef Name="EQUI_CODE" />
@@ -50,7 +58,7 @@
           </Key>
           <Property Name="Payment_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Payment_Date" Type="date" />
-          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="DEPT_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Supplier_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Invoice_Date" Type="date" />
           <Property Name="Billing_period" Type="date" />
@@ -144,10 +152,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PAYMENTS_DEPARTMENT">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+          <End Role="PAYMENTS" Type="Self.PAYMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="PAYMENTS">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="AssetsManagerModelStoreContainer">
           <EntitySet Name="CONTACTS_CATEGORIES" EntityType="Self.CONTACTS_CATEGORIES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTACTS_DATA" EntityType="Self.CONTACTS_DATA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONTACTS_EQUIPMENT" EntityType="Self.CONTACTS_EQUIPMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EQUIPMENT" EntityType="Self.EQUIPMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PAYMENTS" EntityType="Self.PAYMENTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUPPLIER" EntityType="Self.SUPPLIER" Schema="dbo" store:Type="Tables" />
@@ -171,6 +192,10 @@
           <AssociationSet Name="FK_EQUIPMENT_SUPPLIER" Association="Self.FK_EQUIPMENT_SUPPLIER">
             <End Role="SUPPLIER" EntitySet="SUPPLIER" />
             <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENTS_DEPARTMENT" Association="Self.FK_PAYMENTS_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="PAYMENTS" EntitySet="PAYMENTS" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -332,15 +357,29 @@
             <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
             <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
           </AssociationSet>
+          <EntitySet Name="DEPARTMENTs" EntityType="AssetsManagerModel.DEPARTMENT" />
           <EntitySet Name="PAYMENTS" EntityType="AssetsManagerModel.PAYMENT" />
-        </EntityContainer>
+          <AssociationSet Name="FK_PAYMENTS_DEPARTMENT" Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="PAYMENT" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DEPARTMENT">
+          <Key>
+            <PropertyRef Name="DEPT_ID" />
+          </Key>
+          <Property Name="DEPT_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DEPT_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DEPT_NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" FromRole="DEPARTMENT" ToRole="PAYMENT" />
+        </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
             <PropertyRef Name="Payment_ID" />
           </Key>
           <Property Name="Payment_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Payment_Date" Type="DateTime" Precision="0" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DEPT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Supplier_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Invoice_Date" Type="DateTime" Precision="0" />
           <Property Name="Billing_period" Type="DateTime" Precision="0" />
@@ -354,8 +393,21 @@
           <Property Name="VAT" Type="Int32" />
           <Property Name="Amount" Type="Int32" />
           <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" FromRole="PAYMENT" ToRole="DEPARTMENT" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_PAYMENTS_DEPARTMENT">
+          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -425,6 +477,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTMENTs">
+            <EntityTypeMapping TypeName="AssetsManagerModel.DEPARTMENT">
+              <MappingFragment StoreEntitySet="DEPARTMENT">
+                <ScalarProperty Name="DEPT_NOTE" ColumnName="DEPT_NOTE" />
+                <ScalarProperty Name="DEPT_NAME" ColumnName="DEPT_NAME" />
+                <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PAYMENTS">
             <EntityTypeMapping TypeName="AssetsManagerModel.PAYMENT">
               <MappingFragment StoreEntitySet="PAYMENTS">
@@ -441,7 +502,7 @@
                 <ScalarProperty Name="Billing_period" ColumnName="Billing_period" />
                 <ScalarProperty Name="Invoice_Date" ColumnName="Invoice_Date" />
                 <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
                 <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
                 <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
               </MappingFragment>

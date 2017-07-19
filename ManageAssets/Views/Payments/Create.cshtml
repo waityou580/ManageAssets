@@ -7,10 +7,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>PAYMENT</h4>
         <hr />
@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Payment_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment_ID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Payment_ID, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.AutoCode } })
                 @Html.ValidationMessageFor(model => model.Payment_ID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -26,16 +26,25 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Payment_Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment_Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Payment_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Payment_Date, "", new { @class = "text-danger" })
+                
+                <script type="text/javascript">
+                    $(function () {
+                        $('.datepicker').datetimepicker({
+                            format: "YYYY/MM/DD",
+                            defaultDate: new Date()
+                        });
+                    });
+                </script>
             </div>
-        </div>
+        </div>S
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DEPT_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                @Html.DropDownList("DEPT_ID", (SelectList)ViewBag.DeptList, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DEPT_ID, "", new { @class = "text-danger" })
             </div>
         </div>
 

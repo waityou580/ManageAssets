@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fc1dd91473cb4313be6a76edd8894b5b" Name="Diagram1">
+      <Diagram DiagramId="c3a8e4cec95747e9a664133ec3b09f06" Name="Diagram1">
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_DATA" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
@@ -16,8 +16,10 @@
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" ManuallyRouted="false" />
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" ManuallyRouted="false" />
         <AssociationConnector Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="7" PointY="6.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="AssetsManagerModel.DEPARTMENT" Width="1.5" PointX="5.375" PointY="8.25" />
+        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="7.625" PointY="7" />
+        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
