@@ -61,7 +61,14 @@ namespace ManageAssets.Controllers
                 paymentID = "PAY" + date.ToString("yyMMdd") + "001";
             }
             ViewBag.AutoCode = paymentID;
+            // Department Code
             ViewBag.DeptList = new SelectList(db.DEPARTMENTs,"DEPT_ID","DEPT_NAME");
+            //Currency List
+            List<SelectListItem> lstCur = new List<SelectListItem>();
+            lstCur.Add(new SelectListItem { Text = "VND", Value = "VND" });
+            lstCur.Add(new SelectListItem { Text = "USD", Value = "USD" });
+            lstCur.Add(new SelectListItem { Text = "RMD", Value = "RMD" });
+            ViewBag.lstCur = lstCur;
             return View();
         }
 
@@ -143,19 +150,34 @@ namespace ManageAssets.Controllers
         }
         public ActionResult ExportPdf(string id)
         {
-            List<PAYMENT> allCustomer = db.PAYMENTS.Where(p=>p.Payment_ID == id).ToList();
+            List<PAYMENT> payments = db.PAYMENTS.Where(p=>p.Payment_ID == id).ToList();
 
-            //var query = (from i in db.PAYMENTS
-            //             select new
-            //             {
-            //                 Content_VN = i.Content_CN ?? "a",
-            //                 Content_CN = i.Content_VN ?? "No Value"
-            //             }).ToList();
+            var query = (from i in db.PAYMENTS
+                         where i.Payment_ID == id
+                         select new
+                         {
+                             Payment_Date = i.Payment_Date ?? DateTime.Now,
+                             Department = i.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
+                             Supplier_ID = i.Supplier_ID ?? "Ma NCC",
+                             Invoice_Date = i.Invoice_Date ?? DateTime.Now,
+                             Billing_period = i.Billing_period ?? DateTime.Now,
+                             Paument_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
+                             Units_used = i.Units_used ?? "Don vi su dung",
+                             Title_VN =  i.Title_VN ?? "Tieu de VN",
+                             Title_CN = i.Title_CN ?? "Tieu de CN",
+                             Content_VN = i.Content_VN ?? "Noi dung VN",
+                             Content_CN = i.Content_CN ?? "Noi dung CN",
+                             Price = i.Price ?? 0,
+                             VAT = i.VAT ?? 0,
+                             Amount = i.Amount ?? 0,
+                             Currency = i.Currency ?? "VND"
+                         }
+                         ).ToList();
 
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Payments.rpt"));
 
-            rd.SetDataSource(allCustomer);
+            rd.SetDataSource(query);
 
             Response.Buffer = false;
             Response.ClearContent();
@@ -170,17 +192,32 @@ namespace ManageAssets.Controllers
         {
             List<PAYMENT> allCustomer = db.PAYMENTS.Where(p=>p.Payment_ID == id).ToList();
 
-            //var query = (from i in db.PAYMENTS
-            //             select new
-            //             {
-            //                 Content_VN = i.Content_CN ?? "a",
-            //                 Content_CN = i.Content_VN ?? "No Value"
-            //             }).ToList();
+            var query = (from i in db.PAYMENTS
+                         where i.Payment_ID == id
+                         select new
+                         {
+                             Payment_Date = i.Payment_Date ?? DateTime.Now,
+                             Department = i.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
+                             Supplier_ID = i.Supplier_ID ?? "Ma NCC",
+                             Invoice_Date = i.Invoice_Date ?? DateTime.Now,
+                             Billing_period = i.Billing_period ?? DateTime.Now,
+                             Paument_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
+                             Units_used = i.Units_used ?? "Don vi su dung",
+                             Title_VN = i.Title_VN ?? "Tieu de VN",
+                             Title_CN = i.Title_CN ?? "Tieu de CN",
+                             Content_VN = i.Content_VN ?? "Noi dung VN",
+                             Content_CN = i.Content_CN ?? "Noi dung CN",
+                             Price = i.Price ?? 0,
+                             VAT = i.VAT ?? 0,
+                             Amount = i.Amount ?? 0,
+                             Currency = i.Currency ?? "VND"
+                         }
+                         ).ToList();
 
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Payments.rpt"));
 
-            rd.SetDataSource(allCustomer);
+            rd.SetDataSource(query);
 
             Response.Buffer = false;
             Response.ClearContent();

@@ -28,7 +28,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Payment_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Payment_Date, "", new { @class = "text-danger" })
-                
                 <script type="text/javascript">
                     $(function () {
                         $('.datepicker').datetimepicker({
@@ -38,7 +37,7 @@
                     });
                 </script>
             </div>
-        </div>S
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.DEPT_ID, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -123,15 +122,24 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "paymentPrice form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
+            <script type="text/javascript">
+                $('.paymentPrice').keyup(function () {
+                    var t = $('.paymentPrice').val()
+                    var vat = t*10/100
+                    $('.paymentVAT').val(vat)
+                    var amount = parseInt(t) + parseInt(vat)
+                    $('.amount').val(amount)
+                });
+            </script>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.VAT, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "paymentVAT form-control" } })
                 @Html.ValidationMessageFor(model => model.VAT, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -139,7 +147,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "amount form-control" } })
                 @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -147,7 +155,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.Currency, new { htmlAttributes = new { @class = "form-control" } })*@
+               @Html.DropDownList("Currency", (IEnumerable<SelectListItem>)ViewBag.lstCur, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
             </div>
         </div>
