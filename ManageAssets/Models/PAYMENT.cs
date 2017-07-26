@@ -32,5 +32,6 @@ namespace ManageAssets.Models
         public string Currency { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
+        public virtual SUPPLIER SUPPLIER { get; set; }
     }
 }

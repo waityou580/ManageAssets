@@ -9,6 +9,7 @@ using Rotativa;
 using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using System.Globalization;
+using System.Data.Entity;
 
 namespace ManageAssets.Controllers
 {
@@ -63,6 +64,8 @@ namespace ManageAssets.Controllers
             ViewBag.AutoCode = paymentID;
             // Department Code
             ViewBag.DeptList = new SelectList(db.DEPARTMENTs,"DEPT_ID","DEPT_NAME");
+            //Supplier Code
+            ViewBag.lstSupp = new SelectList(db.SUPPLIERs, "SUPPLIER_ID", "SUPPLIER_NAME");
             //Currency List
             List<SelectListItem> lstCur = new List<SelectListItem>();
             lstCur.Add(new SelectListItem { Text = "VND", Value = "VND" });
@@ -88,25 +91,31 @@ namespace ManageAssets.Controllers
         }
 
         // GET: Default/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(String id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PAYMENT lst = db.PAYMENTS.Find(id);
+            if (lst == null)
+            {
+                return HttpNotFound();
+            }
+            return View(lst);
         }
 
         // POST: Default/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(PAYMENT pay)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(pay).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Default/Delete/5
@@ -158,7 +167,7 @@ namespace ManageAssets.Controllers
                          {
                              Payment_Date = i.Payment_Date ?? DateTime.Now,
                              Department = i.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
-                             Supplier_ID = i.Supplier_ID ?? "Ma NCC",
+                             Supplier_ID = i.SUPPLIER.SUPPLIER_NAME ?? "TEN NCC",
                              Invoice_Date = i.Invoice_Date ?? DateTime.Now,
                              Billing_period = i.Billing_period ?? DateTime.Now,
                              Paument_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
@@ -198,7 +207,7 @@ namespace ManageAssets.Controllers
                          {
                              Payment_Date = i.Payment_Date ?? DateTime.Now,
                              Department = i.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
-                             Supplier_ID = i.Supplier_ID ?? "Ma NCC",
+                             Supplier_ID = i.SUPPLIER.SUPPLIER_NAME ?? "TEN NCC",
                              Invoice_Date = i.Invoice_Date ?? DateTime.Now,
                              Billing_period = i.Billing_period ?? DateTime.Now,
                              Paument_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",

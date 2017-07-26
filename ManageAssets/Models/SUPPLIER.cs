@@ -19,6 +19,7 @@ namespace ManageAssets.Models
         {
             this.CONTACTS_DATA = new HashSet<CONTACTS_DATA>();
             this.EQUIPMENTs = new HashSet<EQUIPMENT>();
+            this.PAYMENTS = new HashSet<PAYMENT>();
         }
     
         public string SUPPLIER_ID { get; set; }
@@ -30,5 +31,7 @@ namespace ManageAssets.Models
         public virtual ICollection<CONTACTS_DATA> CONTACTS_DATA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EQUIPMENT> EQUIPMENTs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PAYMENT> PAYMENTS { get; set; }
     }
 }

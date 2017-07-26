@@ -16,9 +16,10 @@
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" ManuallyRouted="false" />
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" ManuallyRouted="false" />
         <AssociationConnector Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="AssetsManagerModel.DEPARTMENT" Width="1.5" PointX="5.375" PointY="8.25" />
+        <EntityTypeShape EntityType="AssetsManagerModel.DEPARTMENT" Width="1.5" PointX="5.625" PointY="8.25" />
         <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="7.625" PointY="7" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" />
+        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
