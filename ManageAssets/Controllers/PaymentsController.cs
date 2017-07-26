@@ -102,6 +102,16 @@ namespace ManageAssets.Controllers
             {
                 return HttpNotFound();
             }
+            // Department Code
+            ViewBag.DeptList = new SelectList(db.DEPARTMENTs, "DEPT_ID", "DEPT_NAME");
+            //Supplier Code
+            ViewBag.lstSupp = new SelectList(db.SUPPLIERs, "SUPPLIER_ID", "SUPPLIER_NAME");
+            //Currency List
+            List<SelectListItem> lstCur = new List<SelectListItem>();
+            lstCur.Add(new SelectListItem { Text = "VND", Value = "VND" });
+            lstCur.Add(new SelectListItem { Text = "USD", Value = "USD" });
+            lstCur.Add(new SelectListItem { Text = "RMD", Value = "RMD" });
+            ViewBag.lstCur = lstCur;
             return View(lst);
         }
 
