@@ -20,6 +20,14 @@
         <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="7.625" PointY="7" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Account" Width="1.5" PointX="14.875" PointY="1" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Action" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Controller" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Role" Width="1.5" PointX="10.375" PointY="2" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_UserGroup" Width="1.5" PointX="12.625" PointY="1.875" />
+        <AssociationConnector Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" />
+        <AssociationConnector Association="AssetsManagerModel.Sys_Credential" />
+        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

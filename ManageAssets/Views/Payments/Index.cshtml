@@ -16,6 +16,9 @@
             @Html.DisplayNameFor(model => model.Payment_Date)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Sys_Account.Username)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DEPARTMENT.DEPT_ID)
         </th>
         <th>
@@ -64,6 +67,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Payment_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sys_Account.Username)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DEPARTMENT.DEPT_ID)

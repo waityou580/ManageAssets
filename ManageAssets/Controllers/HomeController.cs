@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManageAssets.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,12 @@ namespace ManageAssets.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public ActionResult UpdateController()
+        {
+            SaveReflectionController save = new SaveReflectionController();
+            save.SaveReflection();
+            return RedirectToAction("ListController");
         }
     }
 }

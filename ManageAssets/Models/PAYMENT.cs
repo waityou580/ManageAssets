@@ -30,8 +30,10 @@ namespace ManageAssets.Models
         public Nullable<int> VAT { get; set; }
         public Nullable<int> Amount { get; set; }
         public string Currency { get; set; }
+        public string Users_Create { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
         public virtual SUPPLIER SUPPLIER { get; set; }
+        public virtual Sys_Account Sys_Account { get; set; }
     }
 }

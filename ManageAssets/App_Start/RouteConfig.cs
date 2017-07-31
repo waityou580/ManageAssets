@@ -16,7 +16,7 @@ namespace ManageAssets
             routes.MapRoute(
                 name: "Home",
                 url: "{controller}/{action}/{id}",
-                defaults: new { action = "Index", id = UrlParameter.Optional }
+                defaults: new {controller = "Sys_Login", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

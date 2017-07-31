@@ -19,7 +19,18 @@ namespace ManageAssets.Controllers
         // GET: Payments
         public ActionResult Index()
         {
-            List<PAYMENT> lst = db.PAYMENTS.ToList();
+            var userAccount = (Sys_Account)Session["UserAccount"];
+            if (userAccount == null)
+            {
+                return RedirectToAction("Index", "Sys_Login");
+            }
+            List<PAYMENT> lst;
+            if (userAccount.GroupID == "admin")
+            {
+                lst = db.PAYMENTS.ToList();
+                return View(lst);
+            }
+                lst = db.PAYMENTS.Where(p => p.Users_Create == userAccount.Username).ToList();
             return View(lst);
         }
         public ActionResult Details(string id)
@@ -39,6 +50,11 @@ namespace ManageAssets.Controllers
         // GET: Default/Create
         public ActionResult Create()
         {
+            var userAccount = (Sys_Account)Session["UserAccount"];
+            if (userAccount == null)
+            {
+                return RedirectToAction("Index", "Sys_Login");
+            }
             var date = DateTime.Today;
             var date1 = date.ToString("yyyy-MM-dd");
             string paymentID;
@@ -66,6 +82,8 @@ namespace ManageAssets.Controllers
             ViewBag.DeptList = new SelectList(db.DEPARTMENTs,"DEPT_ID","DEPT_NAME");
             //Supplier Code
             ViewBag.lstSupp = new SelectList(db.SUPPLIERs, "SUPPLIER_ID", "SUPPLIER_NAME");
+            // Username
+            ViewBag.userAccount = userAccount.Username;
             //Currency List
             List<SelectListItem> lstCur = new List<SelectListItem>();
             lstCur.Add(new SelectListItem { Text = "VND", Value = "VND" });
