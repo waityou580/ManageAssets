@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ManageAssets.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,8 +17,7 @@ namespace ManageAssets
             routes.MapRoute(
                 name: "Home",
                 url: "{controller}/{action}/{id}",
-                defaults: new {controller = "Sys_Login", action = "Index", id = UrlParameter.Optional }
-            );
+                defaults: new { culture = CultureHelper.GetDefaultCulture(), controller = "Sys_Login", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ManageAssets.Models;
+﻿using ManageAssets.Helper;
+using ManageAssets.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ManageAssets.Controllers
 {
-    public class Sys_LoginController : Controller
+    public class Sys_LoginController : BaseController
     {
         AssetsManagerEntities db = new AssetsManagerEntities();
         // GET: Sys_Login
@@ -27,6 +28,33 @@ namespace ManageAssets.Controllers
             }
 
             return RedirectToAction("Index", "Sys_Login");
+        }
+        public ActionResult LogOut(string id)
+        {
+            return RedirectToAction("Index");
+        }
+        //
+        public ActionResult SetLanguage(string language)
+        {
+            // Validate input
+            language = CultureHelper.GetImplementedCulture(language);
+
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = language;   // update cookie value
+            else
+            {
+
+                cookie = new HttpCookie("_culture");
+                cookie.Value = language;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Response.Cookies.Add(cookie);
+
+            //var t = Request.Url.AbsoluteUri;
+
+            return RedirectToAction("Index"); 
         }
     }
 }
