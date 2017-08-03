@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Amount" xml:space="preserve">
+    <value>Tổng tiền</value>
+  </data>
+  <data name="Billing_period" xml:space="preserve">
+    <value>Ngày thanh toán</value>
+  </data>
   <data name="birthday" xml:space="preserve">
-    <value>Birthday</value>
+    <value>Ngày sinh</value>
   </data>
   <data name="command" xml:space="preserve">
     <value>Command</value>
@@ -132,67 +138,118 @@
   <data name="content" xml:space="preserve">
     <value>Content</value>
   </data>
+  <data name="Content_CN" xml:space="preserve">
+    <value>Nội dung CN</value>
+  </data>
+  <data name="Content_VN" xml:space="preserve">
+    <value>Nội dung VN</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Loại tiền</value>
+  </data>
   <data name="date_create" xml:space="preserve">
     <value>Date Create</value>
+  </data>
+  <data name="DEPT_ID" xml:space="preserve">
+    <value>Mã BP</value>
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="forgot_pass" xml:space="preserve">
+    <value>Forgot Pass</value>
+  </data>
   <data name="id_no" xml:space="preserve">
     <value>Id No</value>
+  </data>
+  <data name="Invoice_Date" xml:space="preserve">
+    <value>Ngày hóa đơn</value>
   </data>
   <data name="logout" xml:space="preserve">
     <value>Log Out</value>
   </data>
   <data name="name" xml:space="preserve">
-    <value>Name</value>
+    <value>Tên</value>
   </data>
   <data name="password" xml:space="preserve">
-    <value>Mật khẩu</value>
+    <value>Mật Khẩu</value>
+  </data>
+  <data name="payment_brand" xml:space="preserve">
+    <value>Loại thanh toán</value>
+  </data>
+  <data name="Payment_Date" xml:space="preserve">
+    <value>Ngày tạo</value>
+  </data>
+  <data name="Payment_method" xml:space="preserve">
+    <value>Phương thức thanh toán</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Số tiền</value>
   </data>
   <data name="remember_me" xml:space="preserve">
-    <value>Lưu mật khẩu</value>
+    <value>lưu mật khẩu</value>
+  </data>
+  <data name="remember_me1" xml:space="preserve">
+    <value>Remember Me</value>
   </data>
   <data name="report_id" xml:space="preserve">
-    <value>Report ID</value>
+    <value>Mã báo cáo</value>
   </data>
   <data name="signin" xml:space="preserve">
-    <value>Đăng Nhập</value>
+    <value>Đăng nhập</value>
   </data>
   <data name="status" xml:space="preserve">
-    <value>Status</value>
+    <value>Trạng thái</value>
   </data>
   <data name="st_cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Hủy bỏ</value>
   </data>
   <data name="st_new" xml:space="preserve">
-    <value>New</value>
+    <value>Tạo mới</value>
   </data>
   <data name="st_return" xml:space="preserve">
-    <value>Return</value>
+    <value>Trở về</value>
   </data>
   <data name="st_send" xml:space="preserve">
-    <value>Sending</value>
+    <value>Gửi</value>
   </data>
   <data name="subject" xml:space="preserve">
-    <value>Subject</value>
+    <value>Tiêu đề</value>
+  </data>
+  <data name="Supplier_ID" xml:space="preserve">
+    <value>Mã NCC</value>
   </data>
   <data name="tel" xml:space="preserve">
-    <value>Telephone</value>
+    <value>SDT</value>
+  </data>
+  <data name="Title_CN" xml:space="preserve">
+    <value>Tiêu đề CN</value>
+  </data>
+  <data name="Title_VN" xml:space="preserve">
+    <value>Tiêu đề VN</value>
+  </data>
+  <data name="Units_used" xml:space="preserve">
+    <value>Đơn vị sử dụng</value>
   </data>
   <data name="username" xml:space="preserve">
-    <value>Tên tài khoản</value>
+    <value>Tên TK</value>
   </data>
   <data name="Username_is_required" xml:space="preserve">
-    <value>Tài khoản không được để trống</value>
+    <value>TK không được trống</value>
   </data>
   <data name="user_create" xml:space="preserve">
-    <value>User Create</value>
+    <value>Người tạo</value>
   </data>
   <data name="user_is_exist" xml:space="preserve">
-    <value>User is existing</value>
+    <value>Tên tài khoản đã bị trùng</value>
   </data>
-  <data name="forgot_pass" xml:space="preserve">
-    <value>Quên tài khoản</value>
+  <data name="VAT" xml:space="preserve">
+    <value>VAT</value>
+  </data>
+  <data name="Payment_ID" xml:space="preserve">
+    <value>Mã thanh toán</value>
+  </data>
+  <data name="Users_Create" xml:space="preserve">
+    <value>Người tạo</value>
   </data>
 </root>

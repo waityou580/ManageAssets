@@ -13,7 +13,7 @@ using System.Data.Entity;
 
 namespace ManageAssets.Controllers
 {
-    public class PaymentsController : Controller
+    public class PaymentsController : BaseController
     {
         private AssetsManagerEntities db = new AssetsManagerEntities();
         // GET: Payments
@@ -84,12 +84,19 @@ namespace ManageAssets.Controllers
             ViewBag.lstSupp = new SelectList(db.SUPPLIERs, "SUPPLIER_ID", "SUPPLIER_NAME");
             // Username
             ViewBag.userAccount = userAccount.Username;
+            //Payment Brand
+            ViewBag.paymentBrandlst = new SelectList(db.Payment_Brand, "Payment_Brand_ID", "Payment_Brand_Name");
             //Currency List
             List<SelectListItem> lstCur = new List<SelectListItem>();
             lstCur.Add(new SelectListItem { Text = "VND", Value = "VND" });
             lstCur.Add(new SelectListItem { Text = "USD", Value = "USD" });
             lstCur.Add(new SelectListItem { Text = "RMD", Value = "RMD" });
             ViewBag.lstCur = lstCur;
+            //Payment Method lst
+            List<SelectListItem> lstMethod = new List<SelectListItem>();
+            lstMethod.Add(new SelectListItem { Text = "CK 轉款", Value = "CK" });
+            lstMethod.Add(new SelectListItem { Text = "TM 現金", Value = "TM" });
+            ViewBag.lstMethod = lstMethod;
             return View();
         }
 
@@ -130,6 +137,11 @@ namespace ManageAssets.Controllers
             lstCur.Add(new SelectListItem { Text = "USD", Value = "USD" });
             lstCur.Add(new SelectListItem { Text = "RMD", Value = "RMD" });
             ViewBag.lstCur = lstCur;
+            //Payment Method lst
+            List<SelectListItem> lstMethod = new List<SelectListItem>();
+            lstMethod.Add(new SelectListItem { Text = "CK 轉款", Value = "CK" });
+            lstMethod.Add(new SelectListItem { Text = "TM 現金", Value = "TM" });
+            ViewBag.lstMethod = lstMethod;
             return View(lst);
         }
 

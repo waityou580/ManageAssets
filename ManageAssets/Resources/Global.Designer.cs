@@ -61,6 +61,24 @@ namespace ManageAssets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Billing Period.
+        /// </summary>
+        public static string Billing_period {
+            get {
+                return ResourceManager.GetString("Billing_period", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Birthday.
         /// </summary>
         public static string birthday {
@@ -106,11 +124,47 @@ namespace ManageAssets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Content CN.
+        /// </summary>
+        public static string Content_CN {
+            get {
+                return ResourceManager.GetString("Content_CN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Content VN.
+        /// </summary>
+        public static string Content_VN {
+            get {
+                return ResourceManager.GetString("Content_VN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date Create.
         /// </summary>
         public static string date_create {
             get {
                 return ResourceManager.GetString("date_create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department ID.
+        /// </summary>
+        public static string DEPT_ID {
+            get {
+                return ResourceManager.GetString("DEPT_ID", resourceCulture);
             }
         }
         
@@ -142,6 +196,15 @@ namespace ManageAssets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invoice Date.
+        /// </summary>
+        public static string Invoice_Date {
+            get {
+                return ResourceManager.GetString("Invoice_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log Out.
         /// </summary>
         public static string logout {
@@ -165,6 +228,51 @@ namespace ManageAssets.Resources {
         public static string password {
             get {
                 return ResourceManager.GetString("password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Brand.
+        /// </summary>
+        public static string payment_brand {
+            get {
+                return ResourceManager.GetString("payment_brand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay Create Date.
+        /// </summary>
+        public static string Payment_Date {
+            get {
+                return ResourceManager.GetString("Payment_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment ID.
+        /// </summary>
+        public static string Payment_ID {
+            get {
+                return ResourceManager.GetString("Payment_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment Method.
+        /// </summary>
+        public static string Payment_method {
+            get {
+                return ResourceManager.GetString("Payment_method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string Price {
+            get {
+                return ResourceManager.GetString("Price", resourceCulture);
             }
         }
         
@@ -259,11 +367,47 @@ namespace ManageAssets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supplier ID.
+        /// </summary>
+        public static string Supplier_ID {
+            get {
+                return ResourceManager.GetString("Supplier_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Telephone.
         /// </summary>
         public static string tel {
             get {
                 return ResourceManager.GetString("tel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title CN.
+        /// </summary>
+        public static string Title_CN {
+            get {
+                return ResourceManager.GetString("Title_CN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title VN.
+        /// </summary>
+        public static string Title_VN {
+            get {
+                return ResourceManager.GetString("Title_VN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Units used.
+        /// </summary>
+        public static string Units_used {
+            get {
+                return ResourceManager.GetString("Units_used", resourceCulture);
             }
         }
         
@@ -300,6 +444,24 @@ namespace ManageAssets.Resources {
         public static string Username_is_required {
             get {
                 return ResourceManager.GetString("Username_is_required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Create.
+        /// </summary>
+        public static string Users_Create {
+            get {
+                return ResourceManager.GetString("Users_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAT.
+        /// </summary>
+        public static string VAT {
+            get {
+                return ResourceManager.GetString("VAT", resourceCulture);
             }
         }
     }

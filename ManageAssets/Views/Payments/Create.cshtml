@@ -1,5 +1,5 @@
 ﻿@model ManageAssets.Models.PAYMENT
-
+@using ManageAssets.Resources
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Payment_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Payment_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Payment_ID, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.AutoCode } })
                 @Html.ValidationMessageFor(model => model.Payment_ID, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Users_Create, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.username, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Users_Create, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.UserAccount } })
                 @Html.ValidationMessageFor(model => model.Users_Create, "", new { @class = "text-danger" })
@@ -32,23 +32,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Payment_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Payment_Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Payment_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Payment_Date, "", new { @class = "text-danger" })
-                <script type="text/javascript">
-                    $(function () {
-                        $('.datepicker').datetimepicker({
-                            format: "YYYY/MM/DD",
-                            defaultDate: new Date()
-                        });
-                    });
-                </script>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DEPT_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.DEPT_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("DEPT_ID", (SelectList)ViewBag.DeptList, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DEPT_ID, "", new { @class = "text-danger" })
@@ -56,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Supplier_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Supplier_ID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("SUPPLIER_ID", (SelectList)ViewBag.lstSupp, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Supplier_ID, "", new { @class = "text-danger" })
@@ -64,31 +56,39 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Invoice_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.payment_brand, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice_Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Payment_Brand_ID", (SelectList)ViewBag.paymentBrandlst, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Payment_Brand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.Label(Global.Invoice_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Invoice_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Invoice_Date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Billing_period, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Billing_period, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Billing_period, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Billing_period, new { htmlAttributes = new { @class = "datepicker form-control" } })
                 @Html.ValidationMessageFor(model => model.Billing_period, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Payment_method, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Payment_method, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment_method, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("Payment_method", (IEnumerable<SelectListItem>)ViewBag.lstMethod, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Payment_method, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Units_used, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Units_used, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Units_used, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Units_used, "", new { @class = "text-danger" })
@@ -96,7 +96,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Title_VN, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Title_VN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title_VN, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title_VN, "", new { @class = "text-danger" })
@@ -104,7 +104,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Title_CN, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Title_CN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title_CN, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title_CN, "", new { @class = "text-danger" })
@@ -112,7 +112,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Content_VN, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label(Global.Content_VN, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Content_VN, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Content_VN, "", new { @class = "text-danger" })
@@ -180,3 +180,12 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script type="text/javascript">
+                    $(function () {
+                        $('.datepicker').datetimepicker({
+                            format: "DD/MM/YYYY",
+                            defaultDate: new Date()
+                        });
+                    });
+</script>

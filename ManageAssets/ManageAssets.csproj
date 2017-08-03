@@ -727,6 +727,9 @@
     <Compile Include="Models\PAYMENT.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Payment_Brand.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SUPPLIER.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

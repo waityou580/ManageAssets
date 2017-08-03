@@ -198,4 +198,58 @@
   <data name="user_is_exist" xml:space="preserve">
     <value>Username is existing</value>
   </data>
+  <data name="DEPT_ID" xml:space="preserve">
+    <value>Department ID</value>
+  </data>
+  <data name="payment_brand" xml:space="preserve">
+    <value>Payment Brand</value>
+  </data>
+  <data name="Payment_Date" xml:space="preserve">
+    <value>Pay Create Date</value>
+  </data>
+  <data name="Supplier_ID" xml:space="preserve">
+    <value>Supplier ID</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Billing_period" xml:space="preserve">
+    <value>Billing Period</value>
+  </data>
+  <data name="Content_CN" xml:space="preserve">
+    <value>Content CN</value>
+  </data>
+  <data name="Content_VN" xml:space="preserve">
+    <value>Content VN</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Invoice_Date" xml:space="preserve">
+    <value>Invoice Date</value>
+  </data>
+  <data name="Payment_method" xml:space="preserve">
+    <value>Payment Method</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Title_CN" xml:space="preserve">
+    <value>Title CN</value>
+  </data>
+  <data name="Title_VN" xml:space="preserve">
+    <value>Title VN</value>
+  </data>
+  <data name="Units_used" xml:space="preserve">
+    <value>Units used</value>
+  </data>
+  <data name="VAT" xml:space="preserve">
+    <value>VAT</value>
+  </data>
+  <data name="Payment_ID" xml:space="preserve">
+    <value>Payment ID</value>
+  </data>
+  <data name="Users_Create" xml:space="preserve">
+    <value>User Create</value>
+  </data>
 </root>

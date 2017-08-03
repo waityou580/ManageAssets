@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c3a8e4cec95747e9a664133ec3b09f06" Name="Diagram1">
+      <Diagram DiagramId="c3a8e4cec95747e9a664133ec3b09f06" Name="Diagram1" ZoomLevel="73">
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_DATA" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
@@ -28,6 +28,8 @@
         <AssociationConnector Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" />
         <AssociationConnector Association="AssetsManagerModel.Sys_Credential" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Payment_Brand" Width="1.5" PointX="10.375" PointY="7.875" />
+        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
