@@ -33,8 +33,8 @@ namespace ManageAssets.Models
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public string UpdateBy { get; set; }
     
-        public virtual Sys_UserGroup Sys_UserGroup { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PAYMENT> PAYMENTS { get; set; }
+        public virtual Sys_UserGroup Sys_UserGroup { get; set; }
     }
 }

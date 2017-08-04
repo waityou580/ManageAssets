@@ -70,7 +70,7 @@
           <Property Name="Users_Create" Type="nvarchar" MaxLength="50" />
           <Property Name="DEPT_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Supplier_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="Payment_Brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="Payment_Brand_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Invoice_Date" Type="date" />
           <Property Name="Billing_period" Type="date" />
           <Property Name="Payment_method" Type="nvarchar" MaxLength="50" />
@@ -243,7 +243,7 @@
               <PropertyRef Name="Payment_Brand_ID" />
             </Principal>
             <Dependent Role="PAYMENTS">
-              <PropertyRef Name="Payment_Brand" />
+              <PropertyRef Name="Payment_Brand_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -376,24 +376,84 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AssetsManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AssetsManagerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CONTACTS_CATEGORIES" EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" />
+          <EntitySet Name="CONTACTS_DATA" EntityType="AssetsManagerModel.CONTACTS_DATA" />
+          <EntitySet Name="CONTACTS_EQUIPMENT" EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" />
+          <EntitySet Name="DEPARTMENTs" EntityType="AssetsManagerModel.DEPARTMENT" />
+          <EntitySet Name="EQUIPMENTs" EntityType="AssetsManagerModel.EQUIPMENT" />
+          <EntitySet Name="Payment_Brand" EntityType="AssetsManagerModel.Payment_Brand" />
+          <EntitySet Name="PAYMENTS" EntityType="AssetsManagerModel.PAYMENT" />
+          <EntitySet Name="SUPPLIERs" EntityType="AssetsManagerModel.SUPPLIER" />
+          <EntitySet Name="Sys_Account" EntityType="AssetsManagerModel.Sys_Account" />
+          <EntitySet Name="Sys_Action" EntityType="AssetsManagerModel.Sys_Action" />
+          <EntitySet Name="Sys_Controller" EntityType="AssetsManagerModel.Sys_Controller" />
+          <EntitySet Name="Sys_Role" EntityType="AssetsManagerModel.Sys_Role" />
+          <EntitySet Name="Sys_UserGroup" EntityType="AssetsManagerModel.Sys_UserGroup" />
+          <EntitySet Name="sysdiagrams" EntityType="AssetsManagerModel.sysdiagram" />
+          <AssociationSet Name="FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES">
+            <End Role="CONTACTS_CATEGORIES" EntitySet="CONTACTS_CATEGORIES" />
+            <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA">
+            <End Role="CONTACTS_DATA" EntitySet="CONTACTS_DATA" />
+            <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACTS_M_SUPPLIER" Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER">
+            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
+            <End Role="CONTACTS_DATA" EntitySet="CONTACTS_DATA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CONTACTS_EQUIPMENT_EQUIPMENT" Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT">
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+            <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENTS_DEPARTMENT" Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="PAYMENT" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EQUIPMENT_SUPPLIER" Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER">
+            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENTS_Payment_Brand" Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand">
+            <End Role="Payment_Brand" EntitySet="Payment_Brand" />
+            <End Role="PAYMENT" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENTS_SUPPLIER" Association="AssetsManagerModel.FK_PAYMENTS_SUPPLIER">
+            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
+            <End Role="PAYMENT" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENTS_Sys_Account" Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account">
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
+            <End Role="PAYMENT" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup">
+            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
+          </AssociationSet>
+          <AssociationSet Name="Sys_Credential" Association="AssetsManagerModel.Sys_Credential">
+            <End Role="Sys_Role" EntitySet="Sys_Role" />
+            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CONTACTS_CATEGORIES">
           <Key>
             <PropertyRef Name="CONTACTS_CATEGORIES_CODE" />
           </Key>
-          <Property Name="CONTACTS_CATEGORIES_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CONTACTS_CATEGORIES_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TOTAL_AMOUNT" Type="Int32" />
-          <NavigationProperty Name="CONTACTS_EQUIPMENT" Relationship="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" FromRole="CONTACTS_CATEGORIES" ToRole="CONTACTS_EQUIPMENT" />
+          <NavigationProperty Name="CONTACTS_EQUIPMENT" Relationship="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" FromRole="CONTACTS_CATEGORIES" ToRole="CONTACTS_EQUIPMENT" />
         </EntityType>
         <EntityType Name="CONTACTS_DATA">
           <Key>
             <PropertyRef Name="CONTACTCODE" />
           </Key>
-          <Property Name="CONTACTCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CONTACTCODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CONTACTDATE" Type="DateTime" Precision="0" />
           <Property Name="SUPPLIER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CONTACTS_EQUIPMENT" Relationship="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" FromRole="CONTACTS_DATA" ToRole="CONTACTS_EQUIPMENT" />
-          <NavigationProperty Name="SUPPLIER" Relationship="Self.FK_CONTACTS_M_SUPPLIER" FromRole="CONTACTS_DATA" ToRole="SUPPLIER" />
+          <NavigationProperty Name="CONTACTS_EQUIPMENT" Relationship="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" FromRole="CONTACTS_DATA" ToRole="CONTACTS_EQUIPMENT" />
+          <NavigationProperty Name="SUPPLIER" Relationship="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" FromRole="CONTACTS_DATA" ToRole="SUPPLIER" />
         </EntityType>
         <EntityType Name="CONTACTS_EQUIPMENT">
           <Key>
@@ -405,166 +465,10 @@
           <Property Name="EQUI_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EQUI_QUANTITY" Type="Int32" />
           <Property Name="EQUI_AMOUNT" Type="Int32" />
-          <NavigationProperty Name="CONTACTS_CATEGORIES" Relationship="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" FromRole="CONTACTS_EQUIPMENT" ToRole="CONTACTS_CATEGORIES" />
-          <NavigationProperty Name="CONTACTS_DATA" Relationship="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" FromRole="CONTACTS_EQUIPMENT" ToRole="CONTACTS_DATA" />
-          <NavigationProperty Name="EQUIPMENT" Relationship="Self.FK_CONTACTS_EQUIPMENT_EQUIPMENT" FromRole="CONTACTS_EQUIPMENT" ToRole="EQUIPMENT" />
+          <NavigationProperty Name="CONTACTS_CATEGORIES" Relationship="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" FromRole="CONTACTS_EQUIPMENT" ToRole="CONTACTS_CATEGORIES" />
+          <NavigationProperty Name="CONTACTS_DATA" Relationship="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" FromRole="CONTACTS_EQUIPMENT" ToRole="CONTACTS_DATA" />
+          <NavigationProperty Name="EQUIPMENT" Relationship="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" FromRole="CONTACTS_EQUIPMENT" ToRole="EQUIPMENT" />
         </EntityType>
-        <EntityType Name="EQUIPMENT">
-          <Key>
-            <PropertyRef Name="EQUI_CODE" />
-          </Key>
-          <Property Name="EQUI_CODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SUPPLIER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EQUI_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="EQUI_WARRANTY" Type="Int32" />
-          <Property Name="EQUI_QUANTITY" Type="Int32" />
-          <Property Name="EQUI_UNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EQUI_PRICE" Type="Int32" />
-          <NavigationProperty Name="CONTACTS_EQUIPMENT" Relationship="Self.FK_CONTACTS_EQUIPMENT_EQUIPMENT" FromRole="EQUIPMENT" ToRole="CONTACTS_EQUIPMENT" />
-          <NavigationProperty Name="SUPPLIER" Relationship="Self.FK_EQUIPMENT_SUPPLIER" FromRole="EQUIPMENT" ToRole="SUPPLIER" />
-        </EntityType>
-        <EntityType Name="SUPPLIER">
-          <Key>
-            <PropertyRef Name="SUPPLIER_ID" />
-          </Key>
-          <Property Name="SUPPLIER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SUPPLIER_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="SUPPLIER_ADD" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="SUPPLIER_TEL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CONTACTS_DATA" Relationship="Self.FK_CONTACTS_M_SUPPLIER" FromRole="SUPPLIER" ToRole="CONTACTS_DATA" />
-          <NavigationProperty Name="EQUIPMENTs" Relationship="Self.FK_EQUIPMENT_SUPPLIER" FromRole="SUPPLIER" ToRole="EQUIPMENT" />
-          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="SUPPLIER" ToRole="PAYMENT" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES">
-          <End Role="CONTACTS_CATEGORIES" Type="Self.CONTACTS_CATEGORIES" Multiplicity="0..1" />
-          <End Role="CONTACTS_EQUIPMENT" Type="Self.CONTACTS_EQUIPMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTACTS_CATEGORIES">
-              <PropertyRef Name="CONTACTS_CATEGORIES_CODE" />
-            </Principal>
-            <Dependent Role="CONTACTS_EQUIPMENT">
-              <PropertyRef Name="CONTACTS_CATEGORIES_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CONTACTS_EQUIPMENT_CONTACTS_DATA">
-          <End Role="CONTACTS_DATA" Type="Self.CONTACTS_DATA" Multiplicity="0..1" />
-          <End Role="CONTACTS_EQUIPMENT" Type="Self.CONTACTS_EQUIPMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONTACTS_DATA">
-              <PropertyRef Name="CONTACTCODE" />
-            </Principal>
-            <Dependent Role="CONTACTS_EQUIPMENT">
-              <PropertyRef Name="CONTACTS_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CONTACTS_M_SUPPLIER">
-          <End Role="SUPPLIER" Type="Self.SUPPLIER" Multiplicity="0..1" />
-          <End Role="CONTACTS_DATA" Type="Self.CONTACTS_DATA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUPPLIER">
-              <PropertyRef Name="SUPPLIER_ID" />
-            </Principal>
-            <Dependent Role="CONTACTS_DATA">
-              <PropertyRef Name="SUPPLIER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CONTACTS_EQUIPMENT_EQUIPMENT">
-          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="0..1" />
-          <End Role="CONTACTS_EQUIPMENT" Type="Self.CONTACTS_EQUIPMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EQUIPMENT">
-              <PropertyRef Name="EQUI_CODE" />
-            </Principal>
-            <Dependent Role="CONTACTS_EQUIPMENT">
-              <PropertyRef Name="EQUI_CODE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EQUIPMENT_SUPPLIER">
-          <End Role="SUPPLIER" Type="Self.SUPPLIER" Multiplicity="0..1" />
-          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUPPLIER">
-              <PropertyRef Name="SUPPLIER_ID" />
-            </Principal>
-            <Dependent Role="EQUIPMENT">
-              <PropertyRef Name="SUPPLIER_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="AssetsManagerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CONTACTS_CATEGORIES" EntityType="Self.CONTACTS_CATEGORIES" />
-          <EntitySet Name="CONTACTS_DATA" EntityType="Self.CONTACTS_DATA" />
-          <EntitySet Name="CONTACTS_EQUIPMENT" EntityType="Self.CONTACTS_EQUIPMENT" />
-          <EntitySet Name="EQUIPMENTs" EntityType="Self.EQUIPMENT" />
-          <EntitySet Name="SUPPLIERs" EntityType="Self.SUPPLIER" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <AssociationSet Name="FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" Association="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES">
-            <End Role="CONTACTS_CATEGORIES" EntitySet="CONTACTS_CATEGORIES" />
-            <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" Association="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA">
-            <End Role="CONTACTS_DATA" EntitySet="CONTACTS_DATA" />
-            <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CONTACTS_M_SUPPLIER" Association="Self.FK_CONTACTS_M_SUPPLIER">
-            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
-            <End Role="CONTACTS_DATA" EntitySet="CONTACTS_DATA" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CONTACTS_EQUIPMENT_EQUIPMENT" Association="Self.FK_CONTACTS_EQUIPMENT_EQUIPMENT">
-            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
-            <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EQUIPMENT_SUPPLIER" Association="Self.FK_EQUIPMENT_SUPPLIER">
-            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
-            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
-          </AssociationSet>
-          <EntitySet Name="DEPARTMENTs" EntityType="AssetsManagerModel.DEPARTMENT" />
-          <EntitySet Name="PAYMENTS" EntityType="AssetsManagerModel.PAYMENT" />
-          <AssociationSet Name="FK_PAYMENTS_DEPARTMENT" Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-            <End Role="PAYMENT" EntitySet="PAYMENTS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PAYMENTS_SUPPLIER" Association="AssetsManagerModel.FK_PAYMENTS_SUPPLIER">
-            <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
-            <End Role="PAYMENT" EntitySet="PAYMENTS" />
-          </AssociationSet>
-          <EntitySet Name="Sys_Account" EntityType="AssetsManagerModel.Sys_Account" />
-          <EntitySet Name="Sys_Action" EntityType="AssetsManagerModel.Sys_Action" />
-          <EntitySet Name="Sys_Controller" EntityType="AssetsManagerModel.Sys_Controller" />
-          <EntitySet Name="Sys_Role" EntityType="AssetsManagerModel.Sys_Role" />
-          <EntitySet Name="Sys_UserGroup" EntityType="AssetsManagerModel.Sys_UserGroup" />
-          <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup">
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
-            <End Role="Sys_Account" EntitySet="Sys_Account" />
-          </AssociationSet>
-          <AssociationSet Name="Sys_Credential" Association="AssetsManagerModel.Sys_Credential">
-            <End Role="Sys_Role" EntitySet="Sys_Role" />
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PAYMENTS_Sys_Account" Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account">
-            <End Role="Sys_Account" EntitySet="Sys_Account" />
-            <End Role="PAYMENT" EntitySet="PAYMENTS" />
-          </AssociationSet>
-          <EntitySet Name="Payment_Brand" EntityType="AssetsManagerModel.Payment_Brand" />
-          <AssociationSet Name="FK_PAYMENTS_Payment_Brand" Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand">
-            <End Role="Payment_Brand" EntitySet="Payment_Brand" />
-            <End Role="PAYMENT" EntitySet="PAYMENTS" />
-          </AssociationSet>
-          </EntityContainer>
         <EntityType Name="DEPARTMENT">
           <Key>
             <PropertyRef Name="DEPT_ID" />
@@ -574,14 +478,40 @@
           <Property Name="DEPT_NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" FromRole="DEPARTMENT" ToRole="PAYMENT" />
         </EntityType>
+        <EntityType Name="EQUIPMENT">
+          <Key>
+            <PropertyRef Name="EQUI_CODE" />
+          </Key>
+          <Property Name="EQUI_CODE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUPPLIER_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EQUI_NAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EQUI_WARRANTY" Type="Int32" />
+          <Property Name="EQUI_QUANTITY" Type="Int32" />
+          <Property Name="EQUI_UNIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EQUI_PRICE" Type="Int32" />
+          <NavigationProperty Name="CONTACTS_EQUIPMENT" Relationship="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" FromRole="EQUIPMENT" ToRole="CONTACTS_EQUIPMENT" />
+          <NavigationProperty Name="SUPPLIER" Relationship="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" FromRole="EQUIPMENT" ToRole="SUPPLIER" />
+        </EntityType>
+        <EntityType Name="Payment_Brand">
+          <Key>
+            <PropertyRef Name="Payment_Brand_ID" />
+          </Key>
+          <Property Name="Payment_Brand_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Brand_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Brand_EN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Brand_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="Payment_Brand" ToRole="PAYMENT" />
+        </EntityType>
         <EntityType Name="PAYMENT">
           <Key>
             <PropertyRef Name="Payment_ID" />
           </Key>
           <Property Name="Payment_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Payment_Date" Type="DateTime" Precision="0" />
+          <Property Name="Users_Create" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DEPT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Supplier_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Brand_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Invoice_Date" Type="DateTime" Precision="0" />
           <Property Name="Billing_period" Type="DateTime" Precision="0" />
           <Property Name="Payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -595,36 +525,22 @@
           <Property Name="Amount" Type="Int32" />
           <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DEPARTMENT" Relationship="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" FromRole="PAYMENT" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="Payment_Brand" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="PAYMENT" ToRole="Payment_Brand" />
           <NavigationProperty Name="SUPPLIER" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="PAYMENT" ToRole="SUPPLIER" />
-          <Property Name="Users_Create" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="PAYMENT" ToRole="Sys_Account" />
-          <Property Name="Payment_Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Payment_Brand1" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="PAYMENT" ToRole="Payment_Brand" />
         </EntityType>
-        <Association Name="FK_PAYMENTS_DEPARTMENT">
-          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DEPARTMENT">
-              <PropertyRef Name="DEPT_ID" />
-            </Principal>
-            <Dependent Role="PAYMENT">
-              <PropertyRef Name="DEPT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PAYMENTS_SUPPLIER">
-          <End Type="AssetsManagerModel.SUPPLIER" Role="SUPPLIER" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SUPPLIER">
-              <PropertyRef Name="SUPPLIER_ID" />
-            </Principal>
-            <Dependent Role="PAYMENT">
-              <PropertyRef Name="Supplier_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="SUPPLIER">
+          <Key>
+            <PropertyRef Name="SUPPLIER_ID" />
+          </Key>
+          <Property Name="SUPPLIER_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUPPLIER_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SUPPLIER_ADD" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SUPPLIER_TEL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CONTACTS_DATA" Relationship="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" FromRole="SUPPLIER" ToRole="CONTACTS_DATA" />
+          <NavigationProperty Name="EQUIPMENTs" Relationship="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" FromRole="SUPPLIER" ToRole="EQUIPMENT" />
+          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="SUPPLIER" ToRole="PAYMENT" />
+        </EntityType>
         <EntityType Name="Sys_Account">
           <Key>
             <PropertyRef Name="Username" />
@@ -641,8 +557,8 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sys_UserGroup" Relationship="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" FromRole="Sys_Account" ToRole="Sys_UserGroup" />
           <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="Sys_Account" ToRole="PAYMENT" />
+          <NavigationProperty Name="Sys_UserGroup" Relationship="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" FromRole="Sys_Account" ToRole="Sys_UserGroup" />
         </EntityType>
         <EntityType Name="Sys_Action">
           <Key>
@@ -682,6 +598,124 @@
           <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" FromRole="Sys_UserGroup" ToRole="Sys_Account" />
           <NavigationProperty Name="Sys_Role" Relationship="AssetsManagerModel.Sys_Credential" FromRole="Sys_UserGroup" ToRole="Sys_Role" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES">
+          <End Type="AssetsManagerModel.CONTACTS_CATEGORIES" Role="CONTACTS_CATEGORIES" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.CONTACTS_EQUIPMENT" Role="CONTACTS_EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTACTS_CATEGORIES">
+              <PropertyRef Name="CONTACTS_CATEGORIES_CODE" />
+            </Principal>
+            <Dependent Role="CONTACTS_EQUIPMENT">
+              <PropertyRef Name="CONTACTS_CATEGORIES_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACTS_EQUIPMENT_CONTACTS_DATA">
+          <End Type="AssetsManagerModel.CONTACTS_DATA" Role="CONTACTS_DATA" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.CONTACTS_EQUIPMENT" Role="CONTACTS_EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTACTS_DATA">
+              <PropertyRef Name="CONTACTCODE" />
+            </Principal>
+            <Dependent Role="CONTACTS_EQUIPMENT">
+              <PropertyRef Name="CONTACTS_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACTS_M_SUPPLIER">
+          <End Type="AssetsManagerModel.SUPPLIER" Role="SUPPLIER" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.CONTACTS_DATA" Role="CONTACTS_DATA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIER">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Principal>
+            <Dependent Role="CONTACTS_DATA">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CONTACTS_EQUIPMENT_EQUIPMENT">
+          <End Type="AssetsManagerModel.EQUIPMENT" Role="EQUIPMENT" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.CONTACTS_EQUIPMENT" Role="CONTACTS_EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EQUIPMENT">
+              <PropertyRef Name="EQUI_CODE" />
+            </Principal>
+            <Dependent Role="CONTACTS_EQUIPMENT">
+              <PropertyRef Name="EQUI_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENTS_DEPARTMENT">
+          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EQUIPMENT_SUPPLIER">
+          <End Type="AssetsManagerModel.SUPPLIER" Role="SUPPLIER" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.EQUIPMENT" Role="EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIER">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENTS_Payment_Brand">
+          <End Type="AssetsManagerModel.Payment_Brand" Role="Payment_Brand" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment_Brand">
+              <PropertyRef Name="Payment_Brand_ID" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="Payment_Brand_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENTS_SUPPLIER">
+          <End Type="AssetsManagerModel.SUPPLIER" Role="SUPPLIER" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SUPPLIER">
+              <PropertyRef Name="SUPPLIER_ID" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="Supplier_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENTS_Sys_Account">
+          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Account">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="PAYMENT">
+              <PropertyRef Name="Users_Create" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sys_Account_Sys_UserGroup">
           <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="0..1" />
           <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
@@ -698,40 +732,6 @@
           <End Type="AssetsManagerModel.Sys_Role" Role="Sys_Role" Multiplicity="*" />
           <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="*" />
         </Association>
-        <Association Name="FK_PAYMENTS_Sys_Account">
-          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sys_Account">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="PAYMENT">
-              <PropertyRef Name="Users_Create" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Payment_Brand">
-          <Key>
-            <PropertyRef Name="Payment_Brand_ID" />
-          </Key>
-          <Property Name="Payment_Brand_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Brand_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Brand_EN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Brand_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="Payment_Brand" ToRole="PAYMENT" />
-        </EntityType>
-        <Association Name="FK_PAYMENTS_Payment_Brand">
-          <End Type="AssetsManagerModel.Payment_Brand" Role="Payment_Brand" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payment_Brand">
-              <PropertyRef Name="Payment_Brand_ID" />
-            </Principal>
-            <Dependent Role="PAYMENT">
-              <PropertyRef Name="Payment_Brand" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -741,64 +741,30 @@
           <EntitySetMapping Name="CONTACTS_CATEGORIES">
             <EntityTypeMapping TypeName="AssetsManagerModel.CONTACTS_CATEGORIES">
               <MappingFragment StoreEntitySet="CONTACTS_CATEGORIES">
-                <ScalarProperty Name="CONTACTS_CATEGORIES_CODE" ColumnName="CONTACTS_CATEGORIES_CODE" />
-                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="TOTAL_AMOUNT" ColumnName="TOTAL_AMOUNT" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="CONTACTS_CATEGORIES_CODE" ColumnName="CONTACTS_CATEGORIES_CODE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CONTACTS_DATA">
             <EntityTypeMapping TypeName="AssetsManagerModel.CONTACTS_DATA">
               <MappingFragment StoreEntitySet="CONTACTS_DATA">
-                <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
-                <ScalarProperty Name="CONTACTDATE" ColumnName="CONTACTDATE" />
                 <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+                <ScalarProperty Name="CONTACTDATE" ColumnName="CONTACTDATE" />
+                <ScalarProperty Name="CONTACTCODE" ColumnName="CONTACTCODE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CONTACTS_EQUIPMENT">
             <EntityTypeMapping TypeName="AssetsManagerModel.CONTACTS_EQUIPMENT">
               <MappingFragment StoreEntitySet="CONTACTS_EQUIPMENT">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CONTACTS_CODE" ColumnName="CONTACTS_CODE" />
-                <ScalarProperty Name="CONTACTS_CATEGORIES_CODE" ColumnName="CONTACTS_CATEGORIES_CODE" />
-                <ScalarProperty Name="EQUI_CODE" ColumnName="EQUI_CODE" />
-                <ScalarProperty Name="EQUI_QUANTITY" ColumnName="EQUI_QUANTITY" />
                 <ScalarProperty Name="EQUI_AMOUNT" ColumnName="EQUI_AMOUNT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EQUIPMENTs">
-            <EntityTypeMapping TypeName="AssetsManagerModel.EQUIPMENT">
-              <MappingFragment StoreEntitySet="EQUIPMENT">
-                <ScalarProperty Name="EQUI_CODE" ColumnName="EQUI_CODE" />
-                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
-                <ScalarProperty Name="EQUI_NAME" ColumnName="EQUI_NAME" />
-                <ScalarProperty Name="EQUI_WARRANTY" ColumnName="EQUI_WARRANTY" />
                 <ScalarProperty Name="EQUI_QUANTITY" ColumnName="EQUI_QUANTITY" />
-                <ScalarProperty Name="EQUI_UNIT" ColumnName="EQUI_UNIT" />
-                <ScalarProperty Name="EQUI_PRICE" ColumnName="EQUI_PRICE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SUPPLIERs">
-            <EntityTypeMapping TypeName="AssetsManagerModel.SUPPLIER">
-              <MappingFragment StoreEntitySet="SUPPLIER">
-                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
-                <ScalarProperty Name="SUPPLIER_NAME" ColumnName="SUPPLIER_NAME" />
-                <ScalarProperty Name="SUPPLIER_ADD" ColumnName="SUPPLIER_ADD" />
-                <ScalarProperty Name="SUPPLIER_TEL" ColumnName="SUPPLIER_TEL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AssetsManagerModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="EQUI_CODE" ColumnName="EQUI_CODE" />
+                <ScalarProperty Name="CONTACTS_CATEGORIES_CODE" ColumnName="CONTACTS_CATEGORIES_CODE" />
+                <ScalarProperty Name="CONTACTS_CODE" ColumnName="CONTACTS_CODE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -811,11 +777,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPMENTs">
+            <EntityTypeMapping TypeName="AssetsManagerModel.EQUIPMENT">
+              <MappingFragment StoreEntitySet="EQUIPMENT">
+                <ScalarProperty Name="EQUI_PRICE" ColumnName="EQUI_PRICE" />
+                <ScalarProperty Name="EQUI_UNIT" ColumnName="EQUI_UNIT" />
+                <ScalarProperty Name="EQUI_QUANTITY" ColumnName="EQUI_QUANTITY" />
+                <ScalarProperty Name="EQUI_WARRANTY" ColumnName="EQUI_WARRANTY" />
+                <ScalarProperty Name="EQUI_NAME" ColumnName="EQUI_NAME" />
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
+                <ScalarProperty Name="EQUI_CODE" ColumnName="EQUI_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_Brand">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Payment_Brand">
+              <MappingFragment StoreEntitySet="Payment_Brand">
+                <ScalarProperty Name="Payment_Brand_CN" ColumnName="Payment_Brand_CN" />
+                <ScalarProperty Name="Payment_Brand_EN" ColumnName="Payment_Brand_EN" />
+                <ScalarProperty Name="Payment_Brand_Name" ColumnName="Payment_Brand_Name" />
+                <ScalarProperty Name="Payment_Brand_ID" ColumnName="Payment_Brand_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PAYMENTS">
             <EntityTypeMapping TypeName="AssetsManagerModel.PAYMENT">
               <MappingFragment StoreEntitySet="PAYMENTS">
-                <ScalarProperty Name="Payment_Brand" ColumnName="Payment_Brand" />
-                <ScalarProperty Name="Users_Create" ColumnName="Users_Create" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="VAT" ColumnName="VAT" />
@@ -828,10 +815,22 @@
                 <ScalarProperty Name="Payment_method" ColumnName="Payment_method" />
                 <ScalarProperty Name="Billing_period" ColumnName="Billing_period" />
                 <ScalarProperty Name="Invoice_Date" ColumnName="Invoice_Date" />
+                <ScalarProperty Name="Payment_Brand_ID" ColumnName="Payment_Brand_ID" />
                 <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
                 <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
+                <ScalarProperty Name="Users_Create" ColumnName="Users_Create" />
                 <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
                 <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUPPLIERs">
+            <EntityTypeMapping TypeName="AssetsManagerModel.SUPPLIER">
+              <MappingFragment StoreEntitySet="SUPPLIER">
+                <ScalarProperty Name="SUPPLIER_TEL" ColumnName="SUPPLIER_TEL" />
+                <ScalarProperty Name="SUPPLIER_ADD" ColumnName="SUPPLIER_ADD" />
+                <ScalarProperty Name="SUPPLIER_NAME" ColumnName="SUPPLIER_NAME" />
+                <ScalarProperty Name="SUPPLIER_ID" ColumnName="SUPPLIER_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -892,6 +891,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AssetsManagerModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="Sys_Credential" TypeName="AssetsManagerModel.Sys_Credential" StoreEntitySet="Sys_Credential">
             <EndProperty Name="Sys_UserGroup">
               <ScalarProperty Name="GroupID" ColumnName="UserGroupID" />
@@ -900,16 +910,6 @@
               <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Payment_Brand">
-            <EntityTypeMapping TypeName="AssetsManagerModel.Payment_Brand">
-              <MappingFragment StoreEntitySet="Payment_Brand">
-                <ScalarProperty Name="Payment_Brand_CN" ColumnName="Payment_Brand_CN" />
-                <ScalarProperty Name="Payment_Brand_EN" ColumnName="Payment_Brand_EN" />
-                <ScalarProperty Name="Payment_Brand_Name" ColumnName="Payment_Brand_Name" />
-                <ScalarProperty Name="Payment_Brand_ID" ColumnName="Payment_Brand_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

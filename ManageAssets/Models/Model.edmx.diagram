@@ -5,32 +5,32 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c3a8e4cec95747e9a664133ec3b09f06" Name="Diagram1" ZoomLevel="73">
-        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_DATA" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AssetsManagerModel.EQUIPMENT" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AssetsManagerModel.SUPPLIER" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="AssetsManagerModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" ManuallyRouted="false" />
-        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" ManuallyRouted="false" />
-        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" ManuallyRouted="false" />
-        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" ManuallyRouted="false" />
-        <AssociationConnector Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="AssetsManagerModel.DEPARTMENT" Width="1.5" PointX="5.625" PointY="8.25" />
-        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="7.625" PointY="7" />
+        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" Width="1.5" PointX="3" PointY="23.625" />
+        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_DATA" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" Width="1.5" PointX="5.25" PointY="12.125" />
+        <EntityTypeShape EntityType="AssetsManagerModel.DEPARTMENT" Width="1.5" PointX="0.75" PointY="14.25" />
+        <EntityTypeShape EntityType="AssetsManagerModel.EQUIPMENT" Width="1.5" PointX="3" PointY="13.5" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Payment_Brand" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="AssetsManagerModel.SUPPLIER" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Account" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Action" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Controller" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Role" Width="1.5" PointX="1.5" PointY="20.875" />
+        <EntityTypeShape EntityType="AssetsManagerModel.Sys_UserGroup" Width="1.5" PointX="1.5" PointY="17.75" />
+        <EntityTypeShape EntityType="AssetsManagerModel.sysdiagram" Width="1.5" PointX="5.75" PointY="3.75" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" />
+        <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" />
+        <AssociationConnector Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" />
+        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" />
-        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Account" Width="1.5" PointX="14.875" PointY="1" />
-        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Action" Width="1.5" PointX="7.375" PointY="3.75" />
-        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Controller" Width="1.5" PointX="10.375" PointY="4.75" />
-        <EntityTypeShape EntityType="AssetsManagerModel.Sys_Role" Width="1.5" PointX="10.375" PointY="2" />
-        <EntityTypeShape EntityType="AssetsManagerModel.Sys_UserGroup" Width="1.5" PointX="12.625" PointY="1.875" />
+        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account" />
         <AssociationConnector Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" />
         <AssociationConnector Association="AssetsManagerModel.Sys_Credential" />
-        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account" />
-        <EntityTypeShape EntityType="AssetsManagerModel.Payment_Brand" Width="1.5" PointX="10.375" PointY="7.875" />
-        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -131,6 +131,8 @@ namespace ManageAssets.Controllers
             ViewBag.DeptList = new SelectList(db.DEPARTMENTs, "DEPT_ID", "DEPT_NAME");
             //Supplier Code
             ViewBag.lstSupp = new SelectList(db.SUPPLIERs, "SUPPLIER_ID", "SUPPLIER_NAME");
+            //Payment Brand
+            ViewBag.paymentBrandlst = new SelectList(db.Payment_Brand, "Payment_Brand_ID", "Payment_Brand_Name");
             //Currency List
             List<SelectListItem> lstCur = new List<SelectListItem>();
             lstCur.Add(new SelectListItem { Text = "VND", Value = "VND" });

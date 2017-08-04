@@ -1,4 +1,5 @@
 ﻿@model ManageAssets.Models.PAYMENT
+@using ManageAssets.Resources
 
 @{
     ViewBag.Title = "Details";
@@ -17,121 +18,135 @@
     <div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Payment_Date)
+                @Html.DisplayName(Global.Payment_ID)
             </dt>
-            <dd>
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Payment_ID)
+            </dd>
+
+            <dt>
+                @Html.DisplayName(Global.Payment_Date)
+            </dt>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Payment_Date)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.DEPARTMENT.DEPT_NAME)
+                @Html.DisplayName(Global.username)
+            </dt>
+            <dd class="form-control">
+                @Html.DisplayFor(model => model.Sys_Account.Username)
+            </dd>
+
+            <dt>
+                @Html.DisplayName(Global.DEPT_ID)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.DEPARTMENT.DEPT_ID)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Supplier_ID)
+                @Html.DisplayName(Global.Supplier_ID)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.SUPPLIER.SUPPLIER_ID)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Invoice_Date)
+                @Html.DisplayName(Global.Invoice_Date)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Invoice_Date)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Billing_period)
+                @Html.DisplayName(Global.Billing_period)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Billing_period)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Payment_method)
+                @Html.DisplayName(Global.Payment_method)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Payment_method)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Units_used)
+                @Html.DisplayName(Global.Units_used)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Units_used)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Title_VN)
+                @Html.DisplayName(Global.Title_VN)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Title_VN)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Title_CN)
+                @Html.DisplayName(Global.Title_CN)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Title_CN)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Content_VN)
+                @Html.DisplayName(Global.Content_VN)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Content_VN)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Content_CN)
+                @Html.DisplayName(Global.Content_CN)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Content_CN)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayName(Global.Price)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Price)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.VAT)
+                @Html.DisplayName(Global.VAT)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.VAT)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Amount)
+                @Html.DisplayName(Global.Amount)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Amount)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Currency)
+                @Html.DisplayName(Global.Currency)
             </dt>
 
-            <dd>
+            <dd class="form-control">
                 @Html.DisplayFor(model => model.Currency)
             </dd>
 
@@ -147,91 +162,91 @@
         <h1>Application for payment</h1>
         <hr />
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Payment_Date)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Payment_Date)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Payment_Date)"/>
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Department)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Department)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Department)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Supplier_ID)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Supplier_ID)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Supplier_ID)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Invoice_Date)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Invoice_Date)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Invoice_Date)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Billing_period)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Billing_period)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Billing_period)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Payment_method)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Payment_method)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Payment_method)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Units_used)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Units_used)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Units_used)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Title_VN)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Title_VN)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Title_VN)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Title_CN)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Title_CN)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Title_CN)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Content_VN)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Content_VN)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Content_VN)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Content_CN)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Content_CN)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Content_CN)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Price)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Price)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Price)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.VAT)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.VAT)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.VAT)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Amount)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Amount)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Amount)" />
             </div>
         </div>
         <div class="form-group">
-            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayNameFor(model => model.Currency)</label>
+            <label for="inputEmail3" class="col-lg-2 control-label">@Html.DisplayName(Global.Currency)</label>
             <div class="col-lg-10">
                 <input class="form-control" value="@Html.DisplayFor(model => model.Currency)" />
             </div>

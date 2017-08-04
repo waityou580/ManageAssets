@@ -19,3 +19,6 @@ textarea {
 .container-custom{
     margin-left:5%;
 }
+.form-control{
+    height:auto;
+}
