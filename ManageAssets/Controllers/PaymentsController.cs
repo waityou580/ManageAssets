@@ -212,7 +212,7 @@ namespace ManageAssets.Controllers
                              Supplier_ID = i.SUPPLIER.SUPPLIER_NAME ?? "TEN NCC",
                              Invoice_Date = i.Invoice_Date ?? DateTime.Now,
                              Billing_period = i.Billing_period ?? DateTime.Now,
-                             Paument_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
+                             Payment_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
                              Units_used = i.Units_used ?? "Don vi su dung",
                              Title_VN =  i.Title_VN ?? "Tieu de VN",
                              Title_CN = i.Title_CN ?? "Tieu de CN",
@@ -226,7 +226,7 @@ namespace ManageAssets.Controllers
                          ).ToList();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Payments.rpt"));
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Payments_Pdf.rpt"));
 
             rd.SetDataSource(query);
 
@@ -236,7 +236,7 @@ namespace ManageAssets.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/pdf", "Payments.pdf");
+            return File(stream, "application/pdf", "Payments_Pdf.pdf");
         }
 
         public ActionResult ExportExcel(string id)
@@ -252,7 +252,7 @@ namespace ManageAssets.Controllers
                              Supplier_ID = i.SUPPLIER.SUPPLIER_NAME ?? "TEN NCC",
                              Invoice_Date = i.Invoice_Date ?? DateTime.Now,
                              Billing_period = i.Billing_period ?? DateTime.Now,
-                             Paument_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
+                             Payment_method = i.Payment_method ?? "Phuong Thuc Thanh Toan",
                              Units_used = i.Units_used ?? "Don vi su dung",
                              Title_VN = i.Title_VN ?? "Tieu de VN",
                              Title_CN = i.Title_CN ?? "Tieu de CN",
@@ -266,7 +266,7 @@ namespace ManageAssets.Controllers
                          ).ToList();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Payments.rpt"));
+            rd.Load(Path.Combine(Server.MapPath("~/Reports"), "Payments_Excel.rpt"));
 
             rd.SetDataSource(query);
 
@@ -276,7 +276,7 @@ namespace ManageAssets.Controllers
 
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.Excel);
             stream.Seek(0, SeekOrigin.Begin);
-            return File(stream, "application/xls", "Payments.xls");
+            return File(stream, "application/xls", "Payments_Excel.xls");
         }
 
     }

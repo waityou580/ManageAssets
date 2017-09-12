@@ -16,14 +16,14 @@ namespace ManageAssets.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Payments : ReportClass {
+    public class Payments_Excel : ReportClass {
         
-        public Payments() {
+        public Payments_Excel() {
         }
         
         public override string ResourceName {
             get {
-                return "Payments.rpt";
+                return "Payments_Excel.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace ManageAssets.Reports {
         
         public override string FullResourceName {
             get {
-                return "ManageAssets.Reports.Payments.rpt";
+                return "ManageAssets.Reports.Payments_Excel.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace ManageAssets.Reports {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedPayments : Component, ICachedReport {
+    public class CachedPayments_Excel : Component, ICachedReport {
         
-        public CachedPayments() {
+        public CachedPayments_Excel() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace ManageAssets.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Payments rpt = new Payments();
+            Payments_Excel rpt = new Payments_Excel();
             rpt.Site = this.Site;
             return rpt;
         }
