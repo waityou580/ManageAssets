@@ -32,6 +32,7 @@ namespace ManageAssets.Models
         public Nullable<int> VAT { get; set; }
         public Nullable<int> Amount { get; set; }
         public string Currency { get; set; }
+        public Nullable<int> Status { get; set; }
     
         public virtual DEPARTMENT DEPARTMENT { get; set; }
         public virtual Payment_Brand Payment_Brand { get; set; }

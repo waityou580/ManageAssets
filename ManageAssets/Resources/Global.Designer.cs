@@ -268,6 +268,15 @@ namespace ManageAssets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment Status.
+        /// </summary>
+        public static string Payment_Status {
+            get {
+                return ResourceManager.GetString("Payment_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Price.
         /// </summary>
         public static string Price {

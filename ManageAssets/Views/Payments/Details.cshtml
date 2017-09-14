@@ -150,6 +150,32 @@
                 @Html.DisplayFor(model => model.Currency)
             </dd>
 
+            <dt>
+                @Html.DisplayName(Global.Payment_Status)
+            </dt>
+
+            <dd class="form-control">
+                @{
+                    string payment_Status = "";
+                    int status = item.Status.Value;
+                    switch (status)
+                    {
+                        case 1:
+                            payment_Status = "Draft";
+                            break;
+                        case 2:
+                            payment_Status = "Approting";
+                            break;
+                        case 3:
+                            payment_Status = "Paymenting";
+                            break;
+                        case 4:
+                            payment_Status = "Paymented";
+                            break;
+                    }
+                }
+                @Html.DisplayFor(model => payment_Status)
+            </dd>
         </dl>
     </div>
     <p>

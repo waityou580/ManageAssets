@@ -83,6 +83,7 @@
           <Property Name="VAT" Type="int" />
           <Property Name="Amount" Type="int" />
           <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="SUPPLIER">
           <Key>
@@ -528,6 +529,7 @@
           <NavigationProperty Name="Payment_Brand" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="PAYMENT" ToRole="Payment_Brand" />
           <NavigationProperty Name="SUPPLIER" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="PAYMENT" ToRole="SUPPLIER" />
           <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="PAYMENT" ToRole="Sys_Account" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="SUPPLIER">
           <Key>
@@ -803,6 +805,7 @@
           <EntitySetMapping Name="PAYMENTS">
             <EntityTypeMapping TypeName="AssetsManagerModel.PAYMENT">
               <MappingFragment StoreEntitySet="PAYMENTS">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="VAT" ColumnName="VAT" />

@@ -97,6 +97,14 @@ namespace ManageAssets.Controllers
             lstMethod.Add(new SelectListItem { Text = "CK 轉款", Value = "CK" });
             lstMethod.Add(new SelectListItem { Text = "TM 現金", Value = "TM" });
             ViewBag.lstMethod = lstMethod;
+            //Payment Status lst
+            List<SelectListItem> lstStatus = new List<SelectListItem>();
+            lstStatus.Add(new SelectListItem { Text = "Draft 草案", Value = "1" });
+            lstStatus.Add(new SelectListItem { Text = "Wait Approval 送審中", Value = "2" });
+            lstStatus.Add(new SelectListItem { Text = "Wait Payment 待付款", Value = "3" });
+            lstStatus.Add(new SelectListItem { Text = "Paymented 已付款", Value = "4" });
+            ViewBag.lstStatus = lstStatus;
+
             return View();
         }
 
@@ -144,6 +152,14 @@ namespace ManageAssets.Controllers
             lstMethod.Add(new SelectListItem { Text = "CK 轉款", Value = "CK" });
             lstMethod.Add(new SelectListItem { Text = "TM 現金", Value = "TM" });
             ViewBag.lstMethod = lstMethod;
+            //Payment Status lst
+            List<SelectListItem> lstStatus = new List<SelectListItem>();
+            lstStatus.Add(new SelectListItem { Text = "Draft 草案", Value = "1" });
+            lstStatus.Add(new SelectListItem { Text = "Wait Approval 送審中", Value = "2" });
+            lstStatus.Add(new SelectListItem { Text = "Wait Payment 待付款", Value = "3" });
+            lstStatus.Add(new SelectListItem { Text = "Paymented 已付款", Value = "4" });
+            ViewBag.lstStatus = lstStatus;
+
             return View(lst);
         }
 

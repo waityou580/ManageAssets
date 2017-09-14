@@ -16,7 +16,7 @@
         <th>
             @Html.DisplayName(Global.Payment_ID)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName(Global.Payment_Date)
         </th>
         <th>
@@ -24,7 +24,7 @@
         </th>
         <th>
             @Html.DisplayName(Global.DEPT_ID)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName(Global.Supplier_ID)
         </th>
@@ -55,28 +55,32 @@
         <th>
             @Html.DisplayName(Global.Content_CN)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayName(Global.Price)
         </th>
         <th>
             @Html.DisplayName(Global.VAT)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayName(Global.Amount)
         </th>
         <th>
             @Html.DisplayName(Global.Currency)
         </th>
+        <th>
+            @Html.DisplayName(Global.Payment_Status)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     //CTR+J open suggestion
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Payment_ID)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Payment_Date)
         </td>
         <td>
@@ -84,7 +88,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DEPARTMENT.DEPT_ID)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.SUPPLIER.SUPPLIER_NAME)
         </td>
@@ -110,17 +114,21 @@
             @Html.DisplayFor(modelItem => item.Title_CN)
         </td>
         <td>
+            @*@{
+                string Content_VN = item.Content_VN.Substring(0,30);
+             }
+            @Html.DisplayFor(modelItem => Content_VN)*@
             @Html.DisplayFor(modelItem => item.Content_VN)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Content_CN)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.VAT)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
@@ -128,11 +136,36 @@
             @Html.DisplayFor(modelItem => item.Currency)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Payment_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Payment_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Payment_ID })
-        </td>
-    </tr>
+            @{ 
+                string payment_Status = "";
+                int status = item.Status.Value;
+                switch (status)
+                {
+                    case 1: payment_Status = "Draft";
+                        break;
+                    case 2:
+                        payment_Status = "Approting";
+                        break;
+                    case 3:
+                        payment_Status = "Paymenting";
+                        break;
+                    case 4:
+                        payment_Status = "Paymented";
+                        break;
+                }
+              }
+              @Html.DisplayFor(modelItem => payment_Status)
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Payment_ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Payment_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Payment_ID })
+            </td>
+
+
+        </tr>
 }
 
 </table>
