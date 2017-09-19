@@ -135,6 +135,8 @@ namespace ManageAssets.Controllers
             {
                 return HttpNotFound();
             }
+            //
+            ViewBag.lstAccount = new SelectList(db.Sys_Account, "Username", "Name");
             // Department Code
             ViewBag.DeptList = new SelectList(db.DEPARTMENTs, "DEPT_ID", "DEPT_NAME");
             //Supplier Code
@@ -159,6 +161,7 @@ namespace ManageAssets.Controllers
             lstStatus.Add(new SelectListItem { Text = "Wait Payment 待付款", Value = "3" });
             lstStatus.Add(new SelectListItem { Text = "Paymented 已付款", Value = "4" });
             ViewBag.lstStatus = lstStatus;
+            
 
             return View(lst);
         }
