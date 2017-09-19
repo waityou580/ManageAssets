@@ -17,7 +17,7 @@ namespace ManageAssets.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DEPARTMENT()
         {
-            this.PAYMENTS = new HashSet<PAYMENT>();
+            this.Sys_Account = new HashSet<Sys_Account>();
         }
     
         public string DEPT_ID { get; set; }
@@ -25,6 +25,6 @@ namespace ManageAssets.Models
         public string DEPT_NOTE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PAYMENT> PAYMENTS { get; set; }
+        public virtual ICollection<Sys_Account> Sys_Account { get; set; }
     }
 }

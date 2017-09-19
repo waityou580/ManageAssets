@@ -40,7 +40,7 @@
                     <p>
                         For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
                     </p>
-                    <span class="section">Edit for Payment</span>
+                    <span class="section">Edit Payment</span>
                     <div>
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         @Html.HiddenFor(model => model.Payment_ID)
@@ -73,14 +73,14 @@
                             </div>
                         </div>
                         @*<div class="item form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                @Html.DisplayName(Global.DEPT_ID)
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                @Html.DropDownList("DEPT_ID", (SelectList)ViewBag.DeptList, htmlAttributes: new { @class = "form-control" ,@readonly="true"})
-                                @Html.ValidationMessageFor(model => model.DEPT_ID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    @Html.DisplayName(Global.DEPT_ID)
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @Html.DropDownList("DEPT_ID", (SelectList)ViewBag.DeptList, htmlAttributes: new { @class = "form-control" ,@readonly="true"})
+                                    @Html.ValidationMessageFor(model => model.DEPT_ID, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
                         <div class="item form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                 @Html.DisplayName(Global.Supplier_ID)
@@ -246,7 +246,7 @@
                             @Html.ActionLink("Back to List", "Index")
                         </p>
                     </div>
-                                    }
+                }
             </div>
         </div>
     </div>

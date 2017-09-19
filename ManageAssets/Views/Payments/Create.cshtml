@@ -2,208 +2,251 @@
 @using ManageAssets.Resources
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Reports_LayoutPage.cshtml";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>PAYMENT</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label(Global.Payment_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment_ID, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.AutoCode } })
-                @Html.ValidationMessageFor(model => model.Payment_ID, "", new { @class = "text-danger" })
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Form validation <small>sub title</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
             </div>
-        </div>
+            <div class="x_content">
+                @using (Html.BeginForm("Create", "Payments", null, FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <p>
+                        For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                    </p>
+                    <span class="section">Create Payment</span>
+                    <div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_ID)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Payment_ID, new { htmlAttributes = new { @class = "col-md-7 col-xs-12 form-control", Value = ViewBag.AutoCode } })
+                                @Html.ValidationMessageFor(model => model.Payment_ID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.Label(Global.username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Users_Create, new { htmlAttributes = new { @class = "form-control", Value = ViewBag.UserAccount } })
-                @Html.ValidationMessageFor(model => model.Users_Create, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.username)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Users_Create, new { htmlAttributes = new { @class = "col-md-7 col-xs-12 form-control", Value = ViewBag.UserAccount } })
+                                @Html.ValidationMessageFor(model => model.Users_Create, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.Label(Global.Payment_Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Payment_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
-                @Html.ValidationMessageFor(model => model.Payment_Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_Date)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Payment_Date, new { htmlAttributes = new { @class = "datepicker col-md-7 col-xs-12 form-control" } })
+                                @Html.ValidationMessageFor(model => model.Payment_Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.Label(Global.DEPT_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("DEPT_ID", (SelectList)ViewBag.DeptList, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.DEPT_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Supplier_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("SUPPLIER_ID", (SelectList)ViewBag.lstSupp, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Supplier_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.payment_brand, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Payment_Brand_ID", (SelectList)ViewBag.paymentBrandlst, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Payment_Brand_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Invoice_Date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Invoice_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
-                @Html.ValidationMessageFor(model => model.Invoice_Date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Billing_period, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Billing_period, new { htmlAttributes = new { @class = "datepicker form-control" } })
-                @Html.ValidationMessageFor(model => model.Billing_period, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Payment_method, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Payment_method", (IEnumerable<SelectListItem>)ViewBag.lstMethod, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Payment_method, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Units_used, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Units_used, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Units_used, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Title_VN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title_VN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title_VN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Title_CN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title_CN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title_CN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Content_VN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content_VN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content_VN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Content_CN, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content_CN, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Content_CN, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "paymentPrice form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-            <script type="text/javascript">
-                $('.paymentPrice').keyup(function () {
-                    var t = $('.paymentPrice').val()
-                    var vat = t * 10 / 100
-                    $('.paymentVAT').val(vat)
-                    var amount = parseInt(t) + parseInt(vat)
-                    $('.amount').val(amount)
-                });
-            </script>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.VAT, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "paymentVAT form-control" } })
-                @Html.ValidationMessageFor(model => model.VAT, "", new { @class = "text-danger" })
-            </div>
-            <script type="text/javascript">
-                $('.paymentVAT').keyup(function () {
-                    var t = $('.paymentPrice').val()
-                    var p = $('.paymentVAT').val()
-                    if (p == null) {
-                        p = 0;
-                    }
-                    var amount = parseInt(t) + parseInt(p)
-                    $('.amount').val(amount)
-                });
-            </script>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "amount form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Currency, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Currency", (IEnumerable<SelectListItem>)ViewBag.lstCur, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label(Global.Payment_Status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Status", (IEnumerable<SelectListItem>)ViewBag.lstStatus, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Supplier_ID)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("Supplier_ID", (SelectList)ViewBag.lstSupp, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Supplier_ID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.payment_brand)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("Payment_Brand_ID", (SelectList)ViewBag.paymentBrandlst, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Payment_Brand_ID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Invoice_Date)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Invoice_Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                                @Html.ValidationMessageFor(model => model.Invoice_Date, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Billing_period)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Billing_period, new { htmlAttributes = new { @class = "datepicker form-control" } })
+                                @Html.ValidationMessageFor(model => model.Billing_period, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_method)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("Payment_method", (IEnumerable<SelectListItem>)ViewBag.lstMethod, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Payment_method, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Units_used)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Units_used, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Units_used, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Title_VN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Title_VN, new { @class = "col-md-7 col-xs-12 form-control" })
+                                @Html.ValidationMessageFor(model => model.Title_VN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Title_CN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Title_CN, new { @class = "col-md-7 col-xs-12 form-control" })
+                                @Html.ValidationMessageFor(model => model.Title_CN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Content_VN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Content_VN, new { @class = "col-md-7 col-xs-12 form-control" })
+                                @Html.ValidationMessageFor(model => model.Content_VN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Content_CN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Content_CN, new { @class = "col-md-7 col-xs-12 form-control" })
+                                @Html.ValidationMessageFor(model => model.Content_CN, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Price)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "paymentPrice form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                            </div>
+                            <script type="text/javascript">
+                                $('.paymentPrice').keyup(function () {
+                                    var t = $('.paymentPrice').val()
+                                    var vat = t * 10 / 100
+                                    $('.paymentVAT').val(vat)
+                                    var amount = parseInt(t) + parseInt(vat)
+                                    $('.amount').val(amount)
+                                });
+                            </script>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.VAT)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "paymentVAT form-control" } })
+                                @Html.ValidationMessageFor(model => model.VAT, "", new { @class = "text-danger" })
+                            </div>
+                            <script type="text/javascript">
+                                $('.paymentVAT').keyup(function () {
+                                    var t = $('.paymentPrice').val()
+                                    var p = $('.paymentVAT').val()
+                                    if (p == null) {
+                                        p = 0;
+                                    }
+                                    var amount = parseInt(t) + parseInt(p)
+                                    $('.amount').val(amount)
+                                });
+                            </script>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Amount)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "amount form-control" } })
+                                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Currency)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("Currency", (IEnumerable<SelectListItem>)ViewBag.lstCur, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Currency, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_Status)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("Status", (IEnumerable<SelectListItem>)ViewBag.lstStatus, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                    </div>
+                }
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
 
 <script type="text/javascript">
-    $(function () {
-        $('.datepicker').datetimepicker({
-            format: "DD/MM/YYYY",
-            defaultDate: new Date()
-        });
-    });
+                                $(function () {
+                                    $('.datepicker').datetimepicker({
+                                        format: "DD/MM/YYYY",
+                                        defaultDate: new Date()
+                                    });
+                                });
 </script>
+

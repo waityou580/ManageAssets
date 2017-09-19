@@ -135,10 +135,8 @@ namespace ManageAssets.Controllers
             {
                 return HttpNotFound();
             }
-            //
+            //Sys_Account List
             ViewBag.lstAccount = new SelectList(db.Sys_Account, "Username", "Name");
-            // Department Code
-            ViewBag.DeptList = new SelectList(db.DEPARTMENTs, "DEPT_ID", "DEPT_NAME");
             //Supplier Code
             ViewBag.lstSupp = new SelectList(db.SUPPLIERs, "SUPPLIER_ID", "SUPPLIER_NAME");
             //Payment Brand
@@ -173,6 +171,7 @@ namespace ManageAssets.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(pay).State = EntityState.Modified;
+                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -227,7 +226,7 @@ namespace ManageAssets.Controllers
                          select new
                          {
                              Payment_Date = i.Payment_Date ?? DateTime.Now,
-                             Department = i.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
+                             Department = i.Sys_Account.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
                              Supplier_ID = i.SUPPLIER.SUPPLIER_NAME ?? "TEN NCC",
                              Invoice_Date = i.Invoice_Date ?? DateTime.Now,
                              Billing_period = i.Billing_period ?? DateTime.Now,
@@ -267,7 +266,7 @@ namespace ManageAssets.Controllers
                          select new
                          {
                              Payment_Date = i.Payment_Date ?? DateTime.Now,
-                             Department = i.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
+                             Department = i.Sys_Account.DEPARTMENT.DEPT_NAME ?? "Ten bo phan",
                              Supplier_ID = i.SUPPLIER.SUPPLIER_NAME ?? "TEN NCC",
                              Invoice_Date = i.Invoice_Date ?? DateTime.Now,
                              Billing_period = i.Billing_period ?? DateTime.Now,

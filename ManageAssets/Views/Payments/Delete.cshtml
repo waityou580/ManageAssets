@@ -1,145 +1,208 @@
 ﻿@model ManageAssets.Models.PAYMENT
-
+@using ManageAssets.Resources
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Reports_LayoutPage.cshtml";
 }
 
-<h2>Delete</h2>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>PAYMENT</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Payment_Date)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Payment_Date)
-        </dd>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Form validation <small>sub title</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="form-horizontal form-label-left">
+                    <p>
+                        For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                    </p>
+                    <span class="section">Are you sure you want to delete this?</span>
+                    <div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_ID)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Payment_ID, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Supplier_ID)
-        </dt>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_Date)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Payment_Date, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Supplier_ID)
-        </dd>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Supplier_ID)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Supplier_ID, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.payment_brand)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Payment_Brand, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Invoice_Date)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Invoice_Date, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Invoice_Date)
-        </dt>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Billing_period)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Billing_period, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_method)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Payment_method, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Invoice_Date)
-        </dd>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Units_used)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Units_used, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Title_VN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Title_VN, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Title_CN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Title_CN, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Content_VN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Content_VN, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Content_CN)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(model => model.Content_CN, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Price)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Price, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.VAT)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.VAT, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Amount)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Currency)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Currency, new { @class = "col-md-7 col-xs-12 form-control" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Payment_Status)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Status, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Billing_period)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Billing_period)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Payment_method)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Payment_method)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Units_used)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Units_used)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title_VN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title_VN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title_CN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title_CN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content_VN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content_VN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Content_CN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content_CN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VAT)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VAT)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DEPARTMENT.DEPT_NAME)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DEPARTMENT.DEPT_NAME)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Delete" class="btn btn-default" />
+                                    @Html.ActionLink("Back to List", "Index")
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.datepicker').datetimepicker({
+            format: "DD/MM/YYYY",
+            defaultDate: new Date()
+        });
+    });
+</script>

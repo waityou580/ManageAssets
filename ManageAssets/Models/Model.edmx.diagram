@@ -4,14 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c3a8e4cec95747e9a664133ec3b09f06" Name="Diagram1" ZoomLevel="73">
+      <Diagram DiagramId="c3a8e4cec95747e9a664133ec3b09f06" Name="Diagram1" ZoomLevel="73" ShowGrid="true">
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_CATEGORIES" Width="1.5" PointX="3" PointY="23.625" />
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_DATA" Width="1.5" PointX="3" PointY="10.875" />
         <EntityTypeShape EntityType="AssetsManagerModel.CONTACTS_EQUIPMENT" Width="1.5" PointX="5.25" PointY="12.125" />
         <EntityTypeShape EntityType="AssetsManagerModel.DEPARTMENT" Width="1.5" PointX="0.75" PointY="14.25" />
         <EntityTypeShape EntityType="AssetsManagerModel.EQUIPMENT" Width="1.5" PointX="3" PointY="13.5" />
         <EntityTypeShape EntityType="AssetsManagerModel.Payment_Brand" Width="1.5" PointX="0.75" PointY="2.125" />
-        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="3" PointY="3.875" />
         <EntityTypeShape EntityType="AssetsManagerModel.SUPPLIER" Width="1.5" PointX="0.75" PointY="6.375" />
         <EntityTypeShape EntityType="AssetsManagerModel.Sys_Account" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="AssetsManagerModel.Sys_Action" Width="1.5" PointX="2.75" PointY="0.75" />
@@ -23,13 +22,14 @@
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_DATA" />
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_M_SUPPLIER" />
         <AssociationConnector Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_EQUIPMENT" />
-        <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" />
         <AssociationConnector Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" />
+        <AssociationConnector Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" />
+        <AssociationConnector Association="AssetsManagerModel.Sys_Credential" />
+        <AssociationConnector Association="AssetsManagerModel.FK_Sys_Account_DEPARTMENT" />
+        <EntityTypeShape EntityType="AssetsManagerModel.PAYMENT" Width="1.5" PointX="3" PointY="4.5" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" />
         <AssociationConnector Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account" />
-        <AssociationConnector Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" />
-        <AssociationConnector Association="AssetsManagerModel.Sys_Credential" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

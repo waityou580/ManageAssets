@@ -68,7 +68,6 @@
           <Property Name="Payment_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Payment_Date" Type="date" />
           <Property Name="Users_Create" Type="nvarchar" MaxLength="50" />
-          <Property Name="DEPT_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Supplier_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Payment_Brand_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="Invoice_Date" Type="date" />
@@ -100,6 +99,7 @@
           </Key>
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dept_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="GroupID" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" />
           <Property Name="Birthday" Type="datetime" />
@@ -224,18 +224,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PAYMENTS_DEPARTMENT">
-          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
-          <End Role="PAYMENTS" Type="Self.PAYMENTS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DEPARTMENT">
-              <PropertyRef Name="DEPT_ID" />
-            </Principal>
-            <Dependent Role="PAYMENTS">
-              <PropertyRef Name="DEPT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PAYMENTS_Payment_Brand">
           <End Role="Payment_Brand" Type="Self.Payment_Brand" Multiplicity="0..1" />
           <End Role="PAYMENTS" Type="Self.PAYMENTS" Multiplicity="*" />
@@ -269,6 +257,18 @@
             </Principal>
             <Dependent Role="PAYMENTS">
               <PropertyRef Name="Users_Create" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Account_DEPARTMENT">
+          <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+          <End Role="Sys_Account" Type="Self.Sys_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="Sys_Account">
+              <PropertyRef Name="Dept_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -344,10 +344,6 @@
             <End Role="SUPPLIER" EntitySet="SUPPLIER" />
             <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_PAYMENTS_DEPARTMENT" Association="Self.FK_PAYMENTS_DEPARTMENT">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
-            <End Role="PAYMENTS" EntitySet="PAYMENTS" />
-          </AssociationSet>
           <AssociationSet Name="FK_PAYMENTS_Payment_Brand" Association="Self.FK_PAYMENTS_Payment_Brand">
             <End Role="Payment_Brand" EntitySet="Payment_Brand" />
             <End Role="PAYMENTS" EntitySet="PAYMENTS" />
@@ -359,6 +355,10 @@
           <AssociationSet Name="FK_PAYMENTS_Sys_Account" Association="Self.FK_PAYMENTS_Sys_Account">
             <End Role="Sys_Account" EntitySet="Sys_Account" />
             <End Role="PAYMENTS" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Account_DEPARTMENT" Association="Self.FK_Sys_Account_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
           </AssociationSet>
           <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="Self.FK_Sys_Account_Sys_UserGroup">
             <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
@@ -384,7 +384,6 @@
           <EntitySet Name="DEPARTMENTs" EntityType="AssetsManagerModel.DEPARTMENT" />
           <EntitySet Name="EQUIPMENTs" EntityType="AssetsManagerModel.EQUIPMENT" />
           <EntitySet Name="Payment_Brand" EntityType="AssetsManagerModel.Payment_Brand" />
-          <EntitySet Name="PAYMENTS" EntityType="AssetsManagerModel.PAYMENT" />
           <EntitySet Name="SUPPLIERs" EntityType="AssetsManagerModel.SUPPLIER" />
           <EntitySet Name="Sys_Account" EntityType="AssetsManagerModel.Sys_Account" />
           <EntitySet Name="Sys_Action" EntityType="AssetsManagerModel.Sys_Action" />
@@ -408,14 +407,23 @@
             <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
             <End Role="CONTACTS_EQUIPMENT" EntitySet="CONTACTS_EQUIPMENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_PAYMENTS_DEPARTMENT" Association="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-            <End Role="PAYMENT" EntitySet="PAYMENTS" />
-          </AssociationSet>
           <AssociationSet Name="FK_EQUIPMENT_SUPPLIER" Association="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER">
             <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
             <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup">
+            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
+          </AssociationSet>
+          <AssociationSet Name="Sys_Credential" Association="AssetsManagerModel.Sys_Credential">
+            <End Role="Sys_Role" EntitySet="Sys_Role" />
+            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Account_DEPARTMENT" Association="AssetsManagerModel.FK_Sys_Account_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
+          </AssociationSet>
+          <EntitySet Name="PAYMENTS" EntityType="AssetsManagerModel.PAYMENT" />
           <AssociationSet Name="FK_PAYMENTS_Payment_Brand" Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand">
             <End Role="Payment_Brand" EntitySet="Payment_Brand" />
             <End Role="PAYMENT" EntitySet="PAYMENTS" />
@@ -427,14 +435,6 @@
           <AssociationSet Name="FK_PAYMENTS_Sys_Account" Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account">
             <End Role="Sys_Account" EntitySet="Sys_Account" />
             <End Role="PAYMENT" EntitySet="PAYMENTS" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup">
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
-            <End Role="Sys_Account" EntitySet="Sys_Account" />
-          </AssociationSet>
-          <AssociationSet Name="Sys_Credential" Association="AssetsManagerModel.Sys_Credential">
-            <End Role="Sys_Role" EntitySet="Sys_Role" />
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CONTACTS_CATEGORIES">
@@ -477,7 +477,7 @@
           <Property Name="DEPT_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DEPT_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="DEPT_NOTE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" FromRole="DEPARTMENT" ToRole="PAYMENT" />
+          <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_Sys_Account_DEPARTMENT" FromRole="DEPARTMENT" ToRole="Sys_Account" />
         </EntityType>
         <EntityType Name="EQUIPMENT">
           <Key>
@@ -502,34 +502,6 @@
           <Property Name="Payment_Brand_EN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Payment_Brand_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="Payment_Brand" ToRole="PAYMENT" />
-        </EntityType>
-        <EntityType Name="PAYMENT">
-          <Key>
-            <PropertyRef Name="Payment_ID" />
-          </Key>
-          <Property Name="Payment_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Date" Type="DateTime" Precision="0" />
-          <Property Name="Users_Create" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DEPT_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Supplier_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Payment_Brand_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Invoice_Date" Type="DateTime" Precision="0" />
-          <Property Name="Billing_period" Type="DateTime" Precision="0" />
-          <Property Name="Payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Units_used" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Title_VN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Title_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Content_VN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Content_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Int32" />
-          <Property Name="VAT" Type="Int32" />
-          <Property Name="Amount" Type="Int32" />
-          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DEPARTMENT" Relationship="AssetsManagerModel.FK_PAYMENTS_DEPARTMENT" FromRole="PAYMENT" ToRole="DEPARTMENT" />
-          <NavigationProperty Name="Payment_Brand" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="PAYMENT" ToRole="Payment_Brand" />
-          <NavigationProperty Name="SUPPLIER" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="PAYMENT" ToRole="SUPPLIER" />
-          <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="PAYMENT" ToRole="Sys_Account" />
-          <Property Name="Status" Type="Int32" />
         </EntityType>
         <EntityType Name="SUPPLIER">
           <Key>
@@ -559,8 +531,10 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="Sys_Account" ToRole="PAYMENT" />
           <NavigationProperty Name="Sys_UserGroup" Relationship="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" FromRole="Sys_Account" ToRole="Sys_UserGroup" />
+          <Property Name="Dept_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="AssetsManagerModel.FK_Sys_Account_DEPARTMENT" FromRole="Sys_Account" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="Sys_Account" ToRole="PAYMENT" />
         </EntityType>
         <EntityType Name="Sys_Action">
           <Key>
@@ -658,18 +632,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PAYMENTS_DEPARTMENT">
-          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DEPARTMENT">
-              <PropertyRef Name="DEPT_ID" />
-            </Principal>
-            <Dependent Role="PAYMENT">
-              <PropertyRef Name="DEPT_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EQUIPMENT_SUPPLIER">
           <End Type="AssetsManagerModel.SUPPLIER" Role="SUPPLIER" Multiplicity="0..1" />
           <End Type="AssetsManagerModel.EQUIPMENT" Role="EQUIPMENT" Multiplicity="*" />
@@ -682,6 +644,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sys_Account_Sys_UserGroup">
+          <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_UserGroup">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Sys_Account">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Sys_Credential">
+          <End Type="AssetsManagerModel.Sys_Role" Role="Sys_Role" Multiplicity="*" />
+          <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Sys_Account_DEPARTMENT">
+          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="Sys_Account">
+              <PropertyRef Name="Dept_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PAYMENT">
+          <Key>
+            <PropertyRef Name="Payment_ID" />
+          </Key>
+          <Property Name="Payment_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Date" Type="DateTime" Precision="0" />
+          <Property Name="Users_Create" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Payment_Brand_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Invoice_Date" Type="DateTime" Precision="0" />
+          <Property Name="Billing_period" Type="DateTime" Precision="0" />
+          <Property Name="Payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Units_used" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title_VN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Title_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Content_VN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Content_CN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="VAT" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="Payment_Brand" Relationship="AssetsManagerModel.FK_PAYMENTS_Payment_Brand" FromRole="PAYMENT" ToRole="Payment_Brand" />
+          <NavigationProperty Name="SUPPLIER" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="PAYMENT" ToRole="SUPPLIER" />
+          <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="PAYMENT" ToRole="Sys_Account" />
+        </EntityType>
         <Association Name="FK_PAYMENTS_Payment_Brand">
           <End Type="AssetsManagerModel.Payment_Brand" Role="Payment_Brand" Multiplicity="0..1" />
           <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
@@ -717,22 +733,6 @@
               <PropertyRef Name="Users_Create" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sys_Account_Sys_UserGroup">
-          <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sys_UserGroup">
-              <PropertyRef Name="GroupID" />
-            </Principal>
-            <Dependent Role="Sys_Account">
-              <PropertyRef Name="GroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Sys_Credential">
-          <End Type="AssetsManagerModel.Sys_Role" Role="Sys_Role" Multiplicity="*" />
-          <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -802,31 +802,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PAYMENTS">
-            <EntityTypeMapping TypeName="AssetsManagerModel.PAYMENT">
-              <MappingFragment StoreEntitySet="PAYMENTS">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Currency" ColumnName="Currency" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="VAT" ColumnName="VAT" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Content_CN" ColumnName="Content_CN" />
-                <ScalarProperty Name="Content_VN" ColumnName="Content_VN" />
-                <ScalarProperty Name="Title_CN" ColumnName="Title_CN" />
-                <ScalarProperty Name="Title_VN" ColumnName="Title_VN" />
-                <ScalarProperty Name="Units_used" ColumnName="Units_used" />
-                <ScalarProperty Name="Payment_method" ColumnName="Payment_method" />
-                <ScalarProperty Name="Billing_period" ColumnName="Billing_period" />
-                <ScalarProperty Name="Invoice_Date" ColumnName="Invoice_Date" />
-                <ScalarProperty Name="Payment_Brand_ID" ColumnName="Payment_Brand_ID" />
-                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
-                <ScalarProperty Name="DEPT_ID" ColumnName="DEPT_ID" />
-                <ScalarProperty Name="Users_Create" ColumnName="Users_Create" />
-                <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
-                <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SUPPLIERs">
             <EntityTypeMapping TypeName="AssetsManagerModel.SUPPLIER">
               <MappingFragment StoreEntitySet="SUPPLIER">
@@ -840,6 +815,7 @@
           <EntitySetMapping Name="Sys_Account">
             <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Account">
               <MappingFragment StoreEntitySet="Sys_Account">
+                <ScalarProperty Name="Dept_ID" ColumnName="Dept_ID" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -913,6 +889,30 @@
               <ScalarProperty Name="RoleID" ColumnName="RoleID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="PAYMENTS">
+            <EntityTypeMapping TypeName="AssetsManagerModel.PAYMENT">
+              <MappingFragment StoreEntitySet="PAYMENTS">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Content_CN" ColumnName="Content_CN" />
+                <ScalarProperty Name="Content_VN" ColumnName="Content_VN" />
+                <ScalarProperty Name="Title_CN" ColumnName="Title_CN" />
+                <ScalarProperty Name="Title_VN" ColumnName="Title_VN" />
+                <ScalarProperty Name="Units_used" ColumnName="Units_used" />
+                <ScalarProperty Name="Payment_method" ColumnName="Payment_method" />
+                <ScalarProperty Name="Billing_period" ColumnName="Billing_period" />
+                <ScalarProperty Name="Invoice_Date" ColumnName="Invoice_Date" />
+                <ScalarProperty Name="Payment_Brand_ID" ColumnName="Payment_Brand_ID" />
+                <ScalarProperty Name="Supplier_ID" ColumnName="Supplier_ID" />
+                <ScalarProperty Name="Users_Create" ColumnName="Users_Create" />
+                <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
+                <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

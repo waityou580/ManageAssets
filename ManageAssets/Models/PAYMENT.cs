@@ -17,7 +17,6 @@ namespace ManageAssets.Models
         public string Payment_ID { get; set; }
         public Nullable<System.DateTime> Payment_Date { get; set; }
         public string Users_Create { get; set; }
-        public string DEPT_ID { get; set; }
         public string Supplier_ID { get; set; }
         public string Payment_Brand_ID { get; set; }
         public Nullable<System.DateTime> Invoice_Date { get; set; }
@@ -34,7 +33,6 @@ namespace ManageAssets.Models
         public string Currency { get; set; }
         public Nullable<int> Status { get; set; }
     
-        public virtual DEPARTMENT DEPARTMENT { get; set; }
         public virtual Payment_Brand Payment_Brand { get; set; }
         public virtual SUPPLIER SUPPLIER { get; set; }
         public virtual Sys_Account Sys_Account { get; set; }

@@ -31,7 +31,6 @@ namespace ManageAssets.Models
         public virtual DbSet<DEPARTMENT> DEPARTMENTs { get; set; }
         public virtual DbSet<EQUIPMENT> EQUIPMENTs { get; set; }
         public virtual DbSet<Payment_Brand> Payment_Brand { get; set; }
-        public virtual DbSet<PAYMENT> PAYMENTS { get; set; }
         public virtual DbSet<SUPPLIER> SUPPLIERs { get; set; }
         public virtual DbSet<Sys_Account> Sys_Account { get; set; }
         public virtual DbSet<Sys_Action> Sys_Action { get; set; }
@@ -39,5 +38,6 @@ namespace ManageAssets.Models
         public virtual DbSet<Sys_Role> Sys_Role { get; set; }
         public virtual DbSet<Sys_UserGroup> Sys_UserGroup { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<PAYMENT> PAYMENTS { get; set; }
     }
 }
