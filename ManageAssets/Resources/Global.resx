@@ -255,4 +255,28 @@
   <data name="Payment_Status" xml:space="preserve">
     <value>Payment Status</value>
   </data>
+  <data name="Controller_ID" xml:space="preserve">
+    <value>Controller_ID</value>
+  </data>
+  <data name="Controller_Name_Cn" xml:space="preserve">
+    <value>Controller_Name_Cn</value>
+  </data>
+  <data name="Controller_Name_En" xml:space="preserve">
+    <value>Controller_Name_En</value>
+  </data>
+  <data name="Controller_Name_Vi" xml:space="preserve">
+    <value>Controller_Name_Vi</value>
+  </data>
+  <data name="Action_ID" xml:space="preserve">
+    <value>Action_ID</value>
+  </data>
+  <data name="Action_Name_Cn" xml:space="preserve">
+    <value>Action_Name_Cn</value>
+  </data>
+  <data name="Action_Name_En" xml:space="preserve">
+    <value>Action_Name_En</value>
+  </data>
+  <data name="Action_Name_Vi" xml:space="preserve">
+    <value>Action_Name_Vi</value>
+  </data>
 </root>

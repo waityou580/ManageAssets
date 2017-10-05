@@ -10,9 +10,11 @@ using CrystalDecisions.CrystalReports.Engine;
 using System.IO;
 using System.Globalization;
 using System.Data.Entity;
+using ManageAssets.Helper;
 
 namespace ManageAssets.Controllers
 {
+    [AuthorizeController]
     public class PaymentsController : BaseController
     {
         private AssetsManagerEntities db = new AssetsManagerEntities();
@@ -25,11 +27,11 @@ namespace ManageAssets.Controllers
                 return RedirectToAction("Index", "Sys_Login");
             }
             List<PAYMENT> lst;
-            if (userAccount.GroupID == "admin")
-            {
-                lst = db.PAYMENTS.ToList();
-                return View(lst);
-            }
+            //if (userAccount.GroupID == "admin")
+            //{
+            //    lst = db.PAYMENTS.ToList();
+            //    return View(lst);
+            //}
                 lst = db.PAYMENTS.Where(p => p.Users_Create == userAccount.Username).ToList();
             return View(lst);
         }
@@ -51,10 +53,10 @@ namespace ManageAssets.Controllers
         public ActionResult Create()
         {
             var userAccount = (Sys_Account)Session["UserAccount"];
-            if (userAccount == null)
-            {
-                return RedirectToAction("Index", "Sys_Login");
-            }
+            //if (userAccount == null)
+            //{
+            //    return RedirectToAction("Index", "Sys_Login");
+            //}
             var date = DateTime.Today;
             var date1 = date.ToString("yyyy-MM-dd");
             string paymentID;
@@ -210,13 +212,13 @@ namespace ManageAssets.Controllers
                 return View();
             }
         }
-        public ActionResult ExportPdf1()
-        {
-            return new ActionAsPdf("Details")
-            {
-                FileName = Server.MapPath("~/Content/List.pdf")
-            };
-        }
+        //public ActionResult ExportPdf1()
+        //{
+        //    return new ActionAsPdf("Details")
+        //    {
+        //        FileName = Server.MapPath("~/Content/List.pdf")
+        //    };
+        //}
         public ActionResult ExportPdf(string id)
         {
             List<PAYMENT> payments = db.PAYMENTS.Where(p=>p.Payment_ID == id).ToList();

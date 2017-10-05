@@ -32,12 +32,13 @@ namespace ManageAssets.Models
         public virtual DbSet<EQUIPMENT> EQUIPMENTs { get; set; }
         public virtual DbSet<Payment_Brand> Payment_Brand { get; set; }
         public virtual DbSet<SUPPLIER> SUPPLIERs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<PAYMENT> PAYMENTS { get; set; }
         public virtual DbSet<Sys_Account> Sys_Account { get; set; }
         public virtual DbSet<Sys_Action> Sys_Action { get; set; }
         public virtual DbSet<Sys_Controller> Sys_Controller { get; set; }
-        public virtual DbSet<Sys_Role> Sys_Role { get; set; }
-        public virtual DbSet<Sys_UserGroup> Sys_UserGroup { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<PAYMENT> PAYMENTS { get; set; }
+        public virtual DbSet<Sys_AccountPermission> Sys_AccountPermission { get; set; }
+        public virtual DbSet<Sys_GroupPermision> Sys_GroupPermision { get; set; }
+        public virtual DbSet<Sys_GroupPermisionDetail> Sys_GroupPermisionDetail { get; set; }
     }
 }

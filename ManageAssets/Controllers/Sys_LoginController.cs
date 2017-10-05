@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ManageAssets.Controllers
 {
+    //[AuthorizeController]
     public class Sys_LoginController : BaseController
     {
         AssetsManagerEntities db = new AssetsManagerEntities();
@@ -23,8 +24,16 @@ namespace ManageAssets.Controllers
             var user = db.Sys_Account.FirstOrDefault(p => p.Username == Account.Username && p.Password == Account.Password);
             if (user != null)
             {
+                List<string> lst = (from a in db.Sys_Account
+                          join b in db.Sys_AccountPermission on a.Username equals b.Username
+                          join c in db.Sys_GroupPermisionDetail on b.GroupID equals c.GroupID
+                          where a.Username == user.Username
+                          select(c.Action_ID)).ToList();
+
+                Session["UserAuthorize"] = lst;
+
                 Session["UserAccount"] = user;
-                return RedirectToAction("Index", "Payments"/*, new { area = "Sys_HomePage" }*/);
+                return RedirectToAction("Index", "Home"/*, new { area = "Sys_HomePage" }*/);
             }
 
             return RedirectToAction("Index", "Sys_Login");
@@ -56,5 +65,6 @@ namespace ManageAssets.Controllers
 
             return RedirectToAction("Index"); 
         }
+
     }
 }

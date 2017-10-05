@@ -1,0 +1,83 @@
+﻿@model IEnumerable<ManageAssets.Models.Sys_Action>
+
+@ViewBag.GroupId
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_Name_Vi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_Name_En)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_Name_Cn)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Action_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Action_Name_Vi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Action_Name_En)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Action_Name_Cn)
+            </td>
+            <td>@Html.ActionLink("Add","AddAction_to_GroupPermission","Sys_GroupPermission", new { id = item.Action_ID, GroupID = ViewBag.GroupID},null)</td>
+            @*<td><a href="#" class="click" onclick="loadPage()" >Add</a></td>*@
+        </tr>
+    }
+
+</table>
+
+
+@*<p id="timer"></p>*@
+
+@*<script>
+    var $timer = $('.x_content1');
+    function loadPage() {
+        var options = {
+            url: '/Sys_GroupPermission/Partial_ViewAllAction',
+            data: { id : 'Payments-ExportPdf', GroupID : 'Administrator' },
+            success: function (time) {
+                $timer.html('').html(time);
+            }
+        };
+        $.ajax(options);
+        console.log(options);
+    };
+</script>*@
+
+@*
+    <script type="text/javascript">
+                    ///Sys_GroupPermission/AddAction_to_GroupPermission/Payments-ExportPdf?GroupID=Administrator
+                    function loadPage() {
+                        //var url = "@(Html.Raw(Url.Action("AddAction_to_GroupPermission", "Sys_GroupPermission")))";
+                        var $id = $('.id');
+                        var $GroupId = $('.GroupId');
+
+                        $.ajax({
+                            //url: "/Sys_GroupPermission/Partial_ViewAllAction/Payments-ExportPdf?GroupID=Administrator",
+                            url: "@Url.Action("Partial_ViewAllAction", "Sys_GroupPermission")",
+                            type: "POST",
+                            //data: $("form").serialize(), //if you need to post Model data, use this
+                            data: { $id, $GroupId },
+                            success: function (result) {
+                                $("#x_content1").html(result);
+                                //$("#x_content1").load();
+                                alert("1");
+                            }
+                        });
+                    }
+    </script>
+*@

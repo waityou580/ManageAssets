@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ManageAssets.Controllers
 {
+    [AuthorizeController]
     public class HomeController : Controller
     {
         // GET: Home
@@ -14,11 +15,6 @@ namespace ManageAssets.Controllers
         {
             return View();
         }
-        public ActionResult UpdateController()
-        {
-            SaveReflectionController save = new SaveReflectionController();
-            save.SaveReflection();
-            return RedirectToAction("ListController");
-        }
+       
     }
 }

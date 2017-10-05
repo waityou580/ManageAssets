@@ -12,18 +12,21 @@ namespace ManageAssets.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Sys_Role
+    public partial class Sys_GroupPermision
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sys_Role()
+        public Sys_GroupPermision()
         {
-            this.Sys_UserGroup = new HashSet<Sys_UserGroup>();
+            this.Sys_AccountPermission = new HashSet<Sys_AccountPermission>();
+            this.Sys_GroupPermisionDetail = new HashSet<Sys_GroupPermisionDetail>();
         }
     
-        public string RoleID { get; set; }
-        public string RoleName { get; set; }
+        public string GroupID { get; set; }
+        public string ActionID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sys_UserGroup> Sys_UserGroup { get; set; }
+        public virtual ICollection<Sys_AccountPermission> Sys_AccountPermission { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sys_GroupPermisionDetail> Sys_GroupPermisionDetail { get; set; }
     }
 }

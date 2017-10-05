@@ -100,7 +100,6 @@
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Dept_ID" Type="nvarchar" MaxLength="50" />
-          <Property Name="GroupID" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" />
           <Property Name="Birthday" Type="datetime" />
           <Property Name="Id_No" Type="nvarchar" MaxLength="50" />
@@ -111,13 +110,20 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Sys_AccountPermission">
+          <Key>
+            <PropertyRef Name="AccountPermissionID" />
+          </Key>
+          <Property Name="AccountPermissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="nvarchar" MaxLength="250" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Sys_Action">
           <Key>
             <PropertyRef Name="Action_ID" />
           </Key>
-          <Property Name="Action_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Controller_ID" Type="int" />
-          <Property Name="Action_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Action_ID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Controller_ID" Type="nvarchar" MaxLength="250" />
           <Property Name="Action_Name_Vi" Type="nvarchar" MaxLength="250" />
           <Property Name="Action_Name_En" Type="nvarchar" MaxLength="250" />
           <Property Name="Action_Name_Cn" Type="nvarchar" MaxLength="250" />
@@ -126,33 +132,25 @@
           <Key>
             <PropertyRef Name="Controller_ID" />
           </Key>
-          <Property Name="Controller_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Controller_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Controller_ID" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Controller_Name_Vi" Type="nvarchar" MaxLength="250" />
           <Property Name="Controller_Name_En" Type="nvarchar" MaxLength="250" />
           <Property Name="Controller_Name_Cn" Type="nvarchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="Sys_Credential">
-          <Key>
-            <PropertyRef Name="UserGroupID" />
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="UserGroupID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleID" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Sys_Role">
-          <Key>
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="RoleID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar" MaxLength="250" />
-        </EntityType>
-        <EntityType Name="Sys_UserGroup">
+        <EntityType Name="Sys_GroupPermision">
           <Key>
             <PropertyRef Name="GroupID" />
           </Key>
-          <Property Name="GroupID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="GroupName" Type="nvarchar" MaxLength="250" />
+          <Property Name="GroupID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ActionID" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Sys_GroupPermisionDetail">
+          <Key>
+            <PropertyRef Name="GPD_Id" />
+          </Key>
+          <Property Name="GPD_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupID" Type="nvarchar" MaxLength="250" />
+          <Property Name="Action_ID" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -272,39 +270,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sys_Account_Sys_UserGroup">
-          <End Role="Sys_UserGroup" Type="Self.Sys_UserGroup" Multiplicity="0..1" />
-          <End Role="Sys_Account" Type="Self.Sys_Account" Multiplicity="*" />
+        <Association Name="FK_Sys_AccountPermission_Sys_Account">
+          <End Role="Sys_Account" Type="Self.Sys_Account" Multiplicity="0..1" />
+          <End Role="Sys_AccountPermission" Type="Self.Sys_AccountPermission" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Sys_UserGroup">
+            <Principal Role="Sys_Account">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Sys_AccountPermission">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_AccountPermission_Sys_GroupPermision">
+          <End Role="Sys_GroupPermision" Type="Self.Sys_GroupPermision" Multiplicity="0..1" />
+          <End Role="Sys_AccountPermission" Type="Self.Sys_AccountPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_GroupPermision">
               <PropertyRef Name="GroupID" />
             </Principal>
-            <Dependent Role="Sys_Account">
+            <Dependent Role="Sys_AccountPermission">
               <PropertyRef Name="GroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sys_Credential_Sys_Role">
-          <End Role="Sys_Role" Type="Self.Sys_Role" Multiplicity="1" />
-          <End Role="Sys_Credential" Type="Self.Sys_Credential" Multiplicity="*" />
+        <Association Name="FK_Sys_Action_Sys_Controller">
+          <End Role="Sys_Controller" Type="Self.Sys_Controller" Multiplicity="0..1" />
+          <End Role="Sys_Action" Type="Self.Sys_Action" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Sys_Role">
-              <PropertyRef Name="RoleID" />
+            <Principal Role="Sys_Controller">
+              <PropertyRef Name="Controller_ID" />
             </Principal>
-            <Dependent Role="Sys_Credential">
-              <PropertyRef Name="RoleID" />
+            <Dependent Role="Sys_Action">
+              <PropertyRef Name="Controller_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sys_Credential_Sys_UserGroup">
-          <End Role="Sys_UserGroup" Type="Self.Sys_UserGroup" Multiplicity="1" />
-          <End Role="Sys_Credential" Type="Self.Sys_Credential" Multiplicity="*" />
+        <Association Name="FK_Sys_GroupPermisionDetail_Sys_Action">
+          <End Role="Sys_Action" Type="Self.Sys_Action" Multiplicity="0..1" />
+          <End Role="Sys_GroupPermisionDetail" Type="Self.Sys_GroupPermisionDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Sys_UserGroup">
+            <Principal Role="Sys_Action">
+              <PropertyRef Name="Action_ID" />
+            </Principal>
+            <Dependent Role="Sys_GroupPermisionDetail">
+              <PropertyRef Name="Action_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_GroupPermisionDetail_Sys_GroupPermision">
+          <End Role="Sys_GroupPermision" Type="Self.Sys_GroupPermision" Multiplicity="0..1" />
+          <End Role="Sys_GroupPermisionDetail" Type="Self.Sys_GroupPermisionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_GroupPermision">
               <PropertyRef Name="GroupID" />
             </Principal>
-            <Dependent Role="Sys_Credential">
-              <PropertyRef Name="UserGroupID" />
+            <Dependent Role="Sys_GroupPermisionDetail">
+              <PropertyRef Name="GroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -318,11 +340,11 @@
           <EntitySet Name="PAYMENTS" EntityType="Self.PAYMENTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SUPPLIER" EntityType="Self.SUPPLIER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sys_Account" EntityType="Self.Sys_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_AccountPermission" EntityType="Self.Sys_AccountPermission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sys_Action" EntityType="Self.Sys_Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sys_Controller" EntityType="Self.Sys_Controller" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sys_Credential" EntityType="Self.Sys_Credential" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sys_Role" EntityType="Self.Sys_Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sys_UserGroup" EntityType="Self.Sys_UserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_GroupPermision" EntityType="Self.Sys_GroupPermision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sys_GroupPermisionDetail" EntityType="Self.Sys_GroupPermisionDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" Association="Self.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES">
             <End Role="CONTACTS_CATEGORIES" EntitySet="CONTACTS_CATEGORIES" />
@@ -360,17 +382,25 @@
             <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
             <End Role="Sys_Account" EntitySet="Sys_Account" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="Self.FK_Sys_Account_Sys_UserGroup">
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
+          <AssociationSet Name="FK_Sys_AccountPermission_Sys_Account" Association="Self.FK_Sys_AccountPermission_Sys_Account">
             <End Role="Sys_Account" EntitySet="Sys_Account" />
+            <End Role="Sys_AccountPermission" EntitySet="Sys_AccountPermission" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sys_Credential_Sys_Role" Association="Self.FK_Sys_Credential_Sys_Role">
-            <End Role="Sys_Role" EntitySet="Sys_Role" />
-            <End Role="Sys_Credential" EntitySet="Sys_Credential" />
+          <AssociationSet Name="FK_Sys_AccountPermission_Sys_GroupPermision" Association="Self.FK_Sys_AccountPermission_Sys_GroupPermision">
+            <End Role="Sys_GroupPermision" EntitySet="Sys_GroupPermision" />
+            <End Role="Sys_AccountPermission" EntitySet="Sys_AccountPermission" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sys_Credential_Sys_UserGroup" Association="Self.FK_Sys_Credential_Sys_UserGroup">
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
-            <End Role="Sys_Credential" EntitySet="Sys_Credential" />
+          <AssociationSet Name="FK_Sys_Action_Sys_Controller" Association="Self.FK_Sys_Action_Sys_Controller">
+            <End Role="Sys_Controller" EntitySet="Sys_Controller" />
+            <End Role="Sys_Action" EntitySet="Sys_Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_GroupPermisionDetail_Sys_Action" Association="Self.FK_Sys_GroupPermisionDetail_Sys_Action">
+            <End Role="Sys_Action" EntitySet="Sys_Action" />
+            <End Role="Sys_GroupPermisionDetail" EntitySet="Sys_GroupPermisionDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_GroupPermisionDetail_Sys_GroupPermision" Association="Self.FK_Sys_GroupPermisionDetail_Sys_GroupPermision">
+            <End Role="Sys_GroupPermision" EntitySet="Sys_GroupPermision" />
+            <End Role="Sys_GroupPermisionDetail" EntitySet="Sys_GroupPermisionDetail" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -385,11 +415,6 @@
           <EntitySet Name="EQUIPMENTs" EntityType="AssetsManagerModel.EQUIPMENT" />
           <EntitySet Name="Payment_Brand" EntityType="AssetsManagerModel.Payment_Brand" />
           <EntitySet Name="SUPPLIERs" EntityType="AssetsManagerModel.SUPPLIER" />
-          <EntitySet Name="Sys_Account" EntityType="AssetsManagerModel.Sys_Account" />
-          <EntitySet Name="Sys_Action" EntityType="AssetsManagerModel.Sys_Action" />
-          <EntitySet Name="Sys_Controller" EntityType="AssetsManagerModel.Sys_Controller" />
-          <EntitySet Name="Sys_Role" EntityType="AssetsManagerModel.Sys_Role" />
-          <EntitySet Name="Sys_UserGroup" EntityType="AssetsManagerModel.Sys_UserGroup" />
           <EntitySet Name="sysdiagrams" EntityType="AssetsManagerModel.sysdiagram" />
           <AssociationSet Name="FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES" Association="AssetsManagerModel.FK_CONTACTS_EQUIPMENT_CONTACTS_CATEGORIES">
             <End Role="CONTACTS_CATEGORIES" EntitySet="CONTACTS_CATEGORIES" />
@@ -411,18 +436,6 @@
             <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
             <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
           </AssociationSet>
-          <AssociationSet Name="FK_Sys_Account_Sys_UserGroup" Association="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup">
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
-            <End Role="Sys_Account" EntitySet="Sys_Account" />
-          </AssociationSet>
-          <AssociationSet Name="Sys_Credential" Association="AssetsManagerModel.Sys_Credential">
-            <End Role="Sys_Role" EntitySet="Sys_Role" />
-            <End Role="Sys_UserGroup" EntitySet="Sys_UserGroup" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sys_Account_DEPARTMENT" Association="AssetsManagerModel.FK_Sys_Account_DEPARTMENT">
-            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
-            <End Role="Sys_Account" EntitySet="Sys_Account" />
-          </AssociationSet>
           <EntitySet Name="PAYMENTS" EntityType="AssetsManagerModel.PAYMENT" />
           <AssociationSet Name="FK_PAYMENTS_Payment_Brand" Association="AssetsManagerModel.FK_PAYMENTS_Payment_Brand">
             <End Role="Payment_Brand" EntitySet="Payment_Brand" />
@@ -432,9 +445,39 @@
             <End Role="SUPPLIER" EntitySet="SUPPLIERs" />
             <End Role="PAYMENT" EntitySet="PAYMENTS" />
           </AssociationSet>
+          <EntitySet Name="Sys_Account" EntityType="AssetsManagerModel.Sys_Account" />
+          <EntitySet Name="Sys_Action" EntityType="AssetsManagerModel.Sys_Action" />
+          <EntitySet Name="Sys_Controller" EntityType="AssetsManagerModel.Sys_Controller" />
+          <AssociationSet Name="FK_Sys_Account_DEPARTMENT" Association="AssetsManagerModel.FK_Sys_Account_DEPARTMENT">
+            <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
+          </AssociationSet>
           <AssociationSet Name="FK_PAYMENTS_Sys_Account" Association="AssetsManagerModel.FK_PAYMENTS_Sys_Account">
             <End Role="Sys_Account" EntitySet="Sys_Account" />
             <End Role="PAYMENT" EntitySet="PAYMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_Action_Sys_Controller" Association="AssetsManagerModel.FK_Sys_Action_Sys_Controller">
+            <End Role="Sys_Controller" EntitySet="Sys_Controller" />
+            <End Role="Sys_Action" EntitySet="Sys_Action" />
+          </AssociationSet>
+          <EntitySet Name="Sys_AccountPermission" EntityType="AssetsManagerModel.Sys_AccountPermission" />
+          <AssociationSet Name="FK_Sys_AccountPermission_Sys_Account" Association="AssetsManagerModel.FK_Sys_AccountPermission_Sys_Account">
+            <End Role="Sys_Account" EntitySet="Sys_Account" />
+            <End Role="Sys_AccountPermission" EntitySet="Sys_AccountPermission" />
+          </AssociationSet>
+          <EntitySet Name="Sys_GroupPermision" EntityType="AssetsManagerModel.Sys_GroupPermision" />
+          <EntitySet Name="Sys_GroupPermisionDetail" EntityType="AssetsManagerModel.Sys_GroupPermisionDetail" />
+          <AssociationSet Name="FK_Sys_AccountPermission_Sys_GroupPermision" Association="AssetsManagerModel.FK_Sys_AccountPermission_Sys_GroupPermision">
+            <End Role="Sys_GroupPermision" EntitySet="Sys_GroupPermision" />
+            <End Role="Sys_AccountPermission" EntitySet="Sys_AccountPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_GroupPermisionDetail_Sys_Action" Association="AssetsManagerModel.FK_Sys_GroupPermisionDetail_Sys_Action">
+            <End Role="Sys_Action" EntitySet="Sys_Action" />
+            <End Role="Sys_GroupPermisionDetail" EntitySet="Sys_GroupPermisionDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sys_GroupPermisionDetail_Sys_GroupPermision" Association="AssetsManagerModel.FK_Sys_GroupPermisionDetail_Sys_GroupPermision">
+            <End Role="Sys_GroupPermision" EntitySet="Sys_GroupPermision" />
+            <End Role="Sys_GroupPermisionDetail" EntitySet="Sys_GroupPermisionDetail" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CONTACTS_CATEGORIES">
@@ -515,65 +558,6 @@
           <NavigationProperty Name="EQUIPMENTs" Relationship="AssetsManagerModel.FK_EQUIPMENT_SUPPLIER" FromRole="SUPPLIER" ToRole="EQUIPMENT" />
           <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_SUPPLIER" FromRole="SUPPLIER" ToRole="PAYMENT" />
         </EntityType>
-        <EntityType Name="Sys_Account">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GroupID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Birthday" Type="DateTime" Precision="3" />
-          <Property Name="Id_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Use_Status" Type="Boolean" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sys_UserGroup" Relationship="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" FromRole="Sys_Account" ToRole="Sys_UserGroup" />
-          <Property Name="Dept_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DEPARTMENT" Relationship="AssetsManagerModel.FK_Sys_Account_DEPARTMENT" FromRole="Sys_Account" ToRole="DEPARTMENT" />
-          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="Sys_Account" ToRole="PAYMENT" />
-        </EntityType>
-        <EntityType Name="Sys_Action">
-          <Key>
-            <PropertyRef Name="Action_ID" />
-          </Key>
-          <Property Name="Action_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Controller_ID" Type="Int32" />
-          <Property Name="Action_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Action_Name_Vi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Action_Name_En" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Action_Name_Cn" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Sys_Controller">
-          <Key>
-            <PropertyRef Name="Controller_ID" />
-          </Key>
-          <Property Name="Controller_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Controller_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Controller_Name_Vi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Controller_Name_En" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Controller_Name_Cn" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Sys_Role">
-          <Key>
-            <PropertyRef Name="RoleID" />
-          </Key>
-          <Property Name="RoleID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RoleName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sys_UserGroup" Relationship="AssetsManagerModel.Sys_Credential" FromRole="Sys_Role" ToRole="Sys_UserGroup" />
-        </EntityType>
-        <EntityType Name="Sys_UserGroup">
-          <Key>
-            <PropertyRef Name="GroupID" />
-          </Key>
-          <Property Name="GroupID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="GroupName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_Sys_Account_Sys_UserGroup" FromRole="Sys_UserGroup" ToRole="Sys_Account" />
-          <NavigationProperty Name="Sys_Role" Relationship="AssetsManagerModel.Sys_Credential" FromRole="Sys_UserGroup" ToRole="Sys_Role" />
-        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -644,34 +628,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sys_Account_Sys_UserGroup">
-          <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Sys_UserGroup">
-              <PropertyRef Name="GroupID" />
-            </Principal>
-            <Dependent Role="Sys_Account">
-              <PropertyRef Name="GroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Sys_Credential">
-          <End Type="AssetsManagerModel.Sys_Role" Role="Sys_Role" Multiplicity="*" />
-          <End Type="AssetsManagerModel.Sys_UserGroup" Role="Sys_UserGroup" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_Sys_Account_DEPARTMENT">
-          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
-          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DEPARTMENT">
-              <PropertyRef Name="DEPT_ID" />
-            </Principal>
-            <Dependent Role="Sys_Account">
-              <PropertyRef Name="Dept_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PAYMENT">
           <Key>
             <PropertyRef Name="Payment_ID" />
@@ -722,6 +678,60 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Sys_Account">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dept_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="3" />
+          <Property Name="Id_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Use_Status" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DEPARTMENT" Relationship="AssetsManagerModel.FK_Sys_Account_DEPARTMENT" FromRole="Sys_Account" ToRole="DEPARTMENT" />
+          <NavigationProperty Name="PAYMENTS" Relationship="AssetsManagerModel.FK_PAYMENTS_Sys_Account" FromRole="Sys_Account" ToRole="PAYMENT" />
+          <NavigationProperty Name="Sys_AccountPermission" Relationship="AssetsManagerModel.FK_Sys_AccountPermission_Sys_Account" FromRole="Sys_Account" ToRole="Sys_AccountPermission" />
+        </EntityType>
+        <EntityType Name="Sys_Action">
+          <Key>
+            <PropertyRef Name="Action_ID" />
+          </Key>
+          <Property Name="Action_ID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Controller_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Action_Name_Vi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Action_Name_En" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Action_Name_Cn" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sys_Controller" Relationship="AssetsManagerModel.FK_Sys_Action_Sys_Controller" FromRole="Sys_Action" ToRole="Sys_Controller" />
+          <NavigationProperty Name="Sys_GroupPermisionDetail" Relationship="AssetsManagerModel.FK_Sys_GroupPermisionDetail_Sys_Action" FromRole="Sys_Action" ToRole="Sys_GroupPermisionDetail" />
+        </EntityType>
+        <EntityType Name="Sys_Controller">
+          <Key>
+            <PropertyRef Name="Controller_ID" />
+          </Key>
+          <Property Name="Controller_ID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Controller_Name_Vi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Controller_Name_En" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Controller_Name_Cn" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sys_Action" Relationship="AssetsManagerModel.FK_Sys_Action_Sys_Controller" FromRole="Sys_Controller" ToRole="Sys_Action" />
+        </EntityType>
+        <Association Name="FK_Sys_Account_DEPARTMENT">
+          <End Type="AssetsManagerModel.DEPARTMENT" Role="DEPARTMENT" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT">
+              <PropertyRef Name="DEPT_ID" />
+            </Principal>
+            <Dependent Role="Sys_Account">
+              <PropertyRef Name="Dept_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PAYMENTS_Sys_Account">
           <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="0..1" />
           <End Type="AssetsManagerModel.PAYMENT" Role="PAYMENT" Multiplicity="*" />
@@ -731,6 +741,95 @@
             </Principal>
             <Dependent Role="PAYMENT">
               <PropertyRef Name="Users_Create" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_Action_Sys_Controller">
+          <End Type="AssetsManagerModel.Sys_Controller" Role="Sys_Controller" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_Action" Role="Sys_Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Controller">
+              <PropertyRef Name="Controller_ID" />
+            </Principal>
+            <Dependent Role="Sys_Action">
+              <PropertyRef Name="Controller_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_AccountPermission">
+          <Key>
+            <PropertyRef Name="AccountPermissionID" />
+          </Key>
+          <Property Name="AccountPermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sys_Account" Relationship="AssetsManagerModel.FK_Sys_AccountPermission_Sys_Account" FromRole="Sys_AccountPermission" ToRole="Sys_Account" />
+          <NavigationProperty Name="Sys_GroupPermision" Relationship="AssetsManagerModel.FK_Sys_AccountPermission_Sys_GroupPermision" FromRole="Sys_AccountPermission" ToRole="Sys_GroupPermision" />
+        </EntityType>
+        <Association Name="FK_Sys_AccountPermission_Sys_Account">
+          <End Type="AssetsManagerModel.Sys_Account" Role="Sys_Account" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_AccountPermission" Role="Sys_AccountPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Account">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="Sys_AccountPermission">
+              <PropertyRef Name="Username" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sys_GroupPermision">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ActionID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sys_AccountPermission" Relationship="AssetsManagerModel.FK_Sys_AccountPermission_Sys_GroupPermision" FromRole="Sys_GroupPermision" ToRole="Sys_AccountPermission" />
+          <NavigationProperty Name="Sys_GroupPermisionDetail" Relationship="AssetsManagerModel.FK_Sys_GroupPermisionDetail_Sys_GroupPermision" FromRole="Sys_GroupPermision" ToRole="Sys_GroupPermisionDetail" />
+        </EntityType>
+        <EntityType Name="Sys_GroupPermisionDetail">
+          <Key>
+            <PropertyRef Name="GPD_Id" />
+          </Key>
+          <Property Name="GPD_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Action_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sys_Action" Relationship="AssetsManagerModel.FK_Sys_GroupPermisionDetail_Sys_Action" FromRole="Sys_GroupPermisionDetail" ToRole="Sys_Action" />
+          <NavigationProperty Name="Sys_GroupPermision" Relationship="AssetsManagerModel.FK_Sys_GroupPermisionDetail_Sys_GroupPermision" FromRole="Sys_GroupPermisionDetail" ToRole="Sys_GroupPermision" />
+        </EntityType>
+        <Association Name="FK_Sys_AccountPermission_Sys_GroupPermision">
+          <End Type="AssetsManagerModel.Sys_GroupPermision" Role="Sys_GroupPermision" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_AccountPermission" Role="Sys_AccountPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_GroupPermision">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Sys_AccountPermission">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_GroupPermisionDetail_Sys_Action">
+          <End Type="AssetsManagerModel.Sys_Action" Role="Sys_Action" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_GroupPermisionDetail" Role="Sys_GroupPermisionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_Action">
+              <PropertyRef Name="Action_ID" />
+            </Principal>
+            <Dependent Role="Sys_GroupPermisionDetail">
+              <PropertyRef Name="Action_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sys_GroupPermisionDetail_Sys_GroupPermision">
+          <End Type="AssetsManagerModel.Sys_GroupPermision" Role="Sys_GroupPermision" Multiplicity="0..1" />
+          <End Type="AssetsManagerModel.Sys_GroupPermisionDetail" Role="Sys_GroupPermisionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sys_GroupPermision">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="Sys_GroupPermisionDetail">
+              <PropertyRef Name="GroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -812,64 +911,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Sys_Account">
-            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Account">
-              <MappingFragment StoreEntitySet="Sys_Account">
-                <ScalarProperty Name="Dept_ID" ColumnName="Dept_ID" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Use_Status" ColumnName="Use_Status" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Tel" ColumnName="Tel" />
-                <ScalarProperty Name="Id_No" ColumnName="Id_No" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sys_Action">
-            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Action">
-              <MappingFragment StoreEntitySet="Sys_Action">
-                <ScalarProperty Name="Action_Name_Cn" ColumnName="Action_Name_Cn" />
-                <ScalarProperty Name="Action_Name_En" ColumnName="Action_Name_En" />
-                <ScalarProperty Name="Action_Name_Vi" ColumnName="Action_Name_Vi" />
-                <ScalarProperty Name="Action_Name" ColumnName="Action_Name" />
-                <ScalarProperty Name="Controller_ID" ColumnName="Controller_ID" />
-                <ScalarProperty Name="Action_ID" ColumnName="Action_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sys_Controller">
-            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Controller">
-              <MappingFragment StoreEntitySet="Sys_Controller">
-                <ScalarProperty Name="Controller_Name_Cn" ColumnName="Controller_Name_Cn" />
-                <ScalarProperty Name="Controller_Name_En" ColumnName="Controller_Name_En" />
-                <ScalarProperty Name="Controller_Name_Vi" ColumnName="Controller_Name_Vi" />
-                <ScalarProperty Name="Controller_Name" ColumnName="Controller_Name" />
-                <ScalarProperty Name="Controller_ID" ColumnName="Controller_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sys_Role">
-            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Role">
-              <MappingFragment StoreEntitySet="Sys_Role">
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sys_UserGroup">
-            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_UserGroup">
-              <MappingFragment StoreEntitySet="Sys_UserGroup">
-                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="AssetsManagerModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -881,14 +922,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Sys_Credential" TypeName="AssetsManagerModel.Sys_Credential" StoreEntitySet="Sys_Credential">
-            <EndProperty Name="Sys_UserGroup">
-              <ScalarProperty Name="GroupID" ColumnName="UserGroupID" />
-            </EndProperty>
-            <EndProperty Name="Sys_Role">
-              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="PAYMENTS">
             <EntityTypeMapping TypeName="AssetsManagerModel.PAYMENT">
               <MappingFragment StoreEntitySet="PAYMENTS">
@@ -910,6 +943,71 @@
                 <ScalarProperty Name="Users_Create" ColumnName="Users_Create" />
                 <ScalarProperty Name="Payment_Date" ColumnName="Payment_Date" />
                 <ScalarProperty Name="Payment_ID" ColumnName="Payment_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Account">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Account">
+              <MappingFragment StoreEntitySet="Sys_Account">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Use_Status" ColumnName="Use_Status" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Id_No" ColumnName="Id_No" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Dept_ID" ColumnName="Dept_ID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Action">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Action">
+              <MappingFragment StoreEntitySet="Sys_Action">
+                <ScalarProperty Name="Action_Name_Cn" ColumnName="Action_Name_Cn" />
+                <ScalarProperty Name="Action_Name_En" ColumnName="Action_Name_En" />
+                <ScalarProperty Name="Action_Name_Vi" ColumnName="Action_Name_Vi" />
+                <ScalarProperty Name="Controller_ID" ColumnName="Controller_ID" />
+                <ScalarProperty Name="Action_ID" ColumnName="Action_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_Controller">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_Controller">
+              <MappingFragment StoreEntitySet="Sys_Controller">
+                <ScalarProperty Name="Controller_Name_Cn" ColumnName="Controller_Name_Cn" />
+                <ScalarProperty Name="Controller_Name_En" ColumnName="Controller_Name_En" />
+                <ScalarProperty Name="Controller_Name_Vi" ColumnName="Controller_Name_Vi" />
+                <ScalarProperty Name="Controller_ID" ColumnName="Controller_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_AccountPermission">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_AccountPermission">
+              <MappingFragment StoreEntitySet="Sys_AccountPermission">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="AccountPermissionID" ColumnName="AccountPermissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_GroupPermision">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_GroupPermision">
+              <MappingFragment StoreEntitySet="Sys_GroupPermision">
+                <ScalarProperty Name="ActionID" ColumnName="ActionID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sys_GroupPermisionDetail">
+            <EntityTypeMapping TypeName="AssetsManagerModel.Sys_GroupPermisionDetail">
+              <MappingFragment StoreEntitySet="Sys_GroupPermisionDetail">
+                <ScalarProperty Name="Action_ID" ColumnName="Action_ID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="GPD_Id" ColumnName="GPD_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

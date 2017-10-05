@@ -4961,6 +4961,15 @@
     <Content Include="vendors\bootstrap-datetimepicker\src\nuget\install.ps1" />
     <Content Include="vendors\bootstrap-datetimepicker\src\sass\bootstrap-datetimepicker-build.scss" />
     <Content Include="vendors\bootstrap-datetimepicker\src\sass\_bootstrap-datetimepicker.scss" />
+    <Content Include="Views\Sys_GroupPermission\Index.cshtml" />
+    <Content Include="Views\Sys_Controller\Index.cshtml" />
+    <Content Include="Views\Sys_Controller\NotificationAuthozide.cshtml" />
+    <Content Include="Views\Sys_Controller\Edit.cshtml" />
+    <Content Include="Views\Sys_Action\Index.cshtml" />
+    <Content Include="Views\Sys_Action\Edit.cshtml" />
+    <Content Include="Views\Sys_GroupPermission\Partial_ViewPermission.cshtml" />
+    <Content Include="Views\Sys_GroupPermission\Edit.cshtml" />
+    <Content Include="Views\Sys_GroupPermission\Partial_ViewAllAction.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -4992,10 +5001,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\Sys_AccountController.cs" />
+    <Compile Include="Controllers\Sys_ActionController.cs" />
+    <Compile Include="Controllers\Sys_ControllerController.cs" />
+    <Compile Include="Controllers\Sys_GroupPermissionController.cs" />
     <Compile Include="Controllers\Sys_LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AuthorizeController.cs" />
     <Compile Include="Helper\CultureHelper.cs" />
     <Compile Include="Helper\ReflectionController.cs" />
     <Compile Include="Helper\SaveReflectionController.cs" />
@@ -5045,16 +5058,19 @@
     <Compile Include="Models\Sys_Account.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sys_AccountPermission.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sys_Action.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sys_Controller.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sys_Role.cs">
+    <Compile Include="Models\Sys_GroupPermision.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sys_UserGroup.cs">
+    <Compile Include="Models\Sys_GroupPermisionDetail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -5079,6 +5095,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Authorize\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ManageAssets.Models.Sys_GroupPermisionDetail>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_ID)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Action_Name_Vi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_Name_En)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Action_Name_Cn)
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Action_ID)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Sys_Action.Action_Name_Vi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sys_Action.Action_Name_En)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sys_Action.Action_Name_Cn)
+            </td>*@
+            <td>
+                @Html.ActionLink("Remove", "Remove_GroupPermission", "Sys_GroupPermission",new { id = item.GPD_Id, groupId = item.GroupID}, null)
+            </td>
+        </tr>
+    }
+
+</table>
+

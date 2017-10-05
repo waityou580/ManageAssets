@@ -34,6 +34,7 @@
     <link href="~/build/css/custom.min.css" rel="stylesheet">
 
 
+
 </head>
 
 <body class="nav-md">
@@ -96,9 +97,9 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-table"></i> Accounting <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="tables.html">Tables</a></li>
+                                        <li>@Html.ActionLink("Payment","index","Payments")</li>
                                         <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                                     </ul>
                                 </li>
@@ -117,6 +118,15 @@
                                     <ul class="nav child_menu">
                                         <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
                                         <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-cog"></i>Setting <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="Account_Manager.html">Account_Manager</a></li>
+                                        <li>@Html.ActionLink("Authorize","index","Home")</li>
+                                        <li>@Html.ActionLink("Permission_Manager", "index", "Sys_GroupPermission")</li>
+                                        <li>@Html.ActionLink("Controller_Manager", "index", "Sys_Controller")</li>
                                     </ul>
                                 </li>
                             </ul>

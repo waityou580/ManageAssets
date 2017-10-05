@@ -1,0 +1,98 @@
+﻿@model ManageAssets.Models.Sys_Controller
+@using ManageAssets.Resources
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Reports_LayoutPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Form edit</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @using (Html.BeginForm("Edit", "Sys_Controller", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <p>
+                        For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                    </p>
+                    <span class="section">Edit Controller</span>
+                    <div>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Controller_ID)
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Controller_ID)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Controller_ID, new { @class = "col-md-7 col-xs-12 form-control ", @readonly = "True" })
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Controller_Name_Vi)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Controller_Name_Vi, new { htmlAttributes = new { @class = "datepicker col-md-7 col-xs-12 form-control" } })
+                                @Html.ValidationMessageFor(model => model.Controller_Name_Vi, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Controller_Name_En)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Controller_Name_En, new { htmlAttributes = new { @class = "datepicker col-md-7 col-xs-12 form-control" } })
+                                @Html.ValidationMessageFor(model => model.Controller_Name_En, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                @Html.DisplayName(Global.Controller_Name_Cn)
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.EditorFor(model => model.Controller_Name_Cn, new { htmlAttributes = new { @class = "datepicker col-md-7 col-xs-12 form-control" } })
+                                @Html.ValidationMessageFor(model => model.Controller_Name_Cn, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="item form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

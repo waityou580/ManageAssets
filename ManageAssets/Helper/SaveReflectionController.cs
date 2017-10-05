@@ -12,49 +12,34 @@ namespace ManageAssets.Helper
         AssetsManagerEntities db = new AssetsManagerEntities();
         public void SaveReflection()
         {
-            Sys_Controller sysController = new Sys_Controller();
-            Sys_Action sysAction = new Sys_Action();
             ReflectionController reflection = new ReflectionController();
 
             List<Type> listController = reflection.GetControllers();
             foreach (Type controller in listController)
             {
-                try
+                if (!(db.Sys_Controller.Any(n => n.Controller_ID == controller.Name)))
                 {
-                    var controllerName = db.Sys_Controller.Where(p => p.Controller_Name == controller.Name).SingleOrDefault();
-                    if (controllerName == null)
-                    {
-                        sysController.Controller_Name = controller.Name;
-                        db.Sys_Controller.Add(sysController);
-                        db.SaveChanges();
-                    }
+                    Sys_Controller controllerDB = new Sys_Controller();
+                    controllerDB.Controller_ID = controller.Name;
+                    db.Sys_Controller.Add(controllerDB);
+                    db.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                }
+
                 List<string> listAction = reflection.GetAction(controller);
                 foreach (string action in listAction)
                 {
-                    var controllerID = db.Sys_Controller.Where(p => p.Controller_Name == controller.Name).SingleOrDefault().Controller_ID;
-                    if (db.Sys_Action.Where(p => p.Action_Name == action && p.Controller_ID == controllerID).SingleOrDefault() == null)
+                    var controllerID = db.Sys_Controller.Where(p => p.Controller_ID == controller.Name).SingleOrDefault().Controller_ID;
+                    var checkActionDB = db.Sys_Action.Any(n => n.Action_ID == (controllerID.Remove(controllerID.Length - 10)) + "-" + action && n.Controller_ID == controllerID);
+                    if (!checkActionDB)
                     {
-                        sysAction.Controller_ID = controllerID;
-                        sysAction.Action_Name = action;
-                        db.Sys_Action.Add(sysAction);
+                        Sys_Action actionDB = new Sys_Action();
+                        string actionID = controllerID.Remove(controllerID.Length - 10) + "-" + action;
+                        actionDB.Action_ID = actionID;
+                        actionDB.Controller_ID = controllerID;
+                        db.Sys_Action.Add(actionDB);
                         db.SaveChanges();
                     }
-                }
-            }
-            var lstAction = db.Sys_Action.ToList();
-            Sys_Role role = new Sys_Role();
-            foreach (var i in lstAction)
-            {
-                if(db.Sys_Role.Where(n => n.RoleID == i.Action_ID.ToString()).SingleOrDefault() == null)
-                {
-                    role.RoleID = i.Action_ID.ToString();
-                    role.RoleName = db.Sys_Controller.Find(i.Controller_ID).Controller_Name.ToString() + "-" + i.Action_Name.ToString();
-                    db.Sys_Role.Add(role);
-                    db.SaveChanges();
+
                 }
             }
         }

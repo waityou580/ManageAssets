@@ -61,6 +61,42 @@ namespace ManageAssets.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action_ID.
+        /// </summary>
+        public static string Action_ID {
+            get {
+                return ResourceManager.GetString("Action_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action_Name_Cn.
+        /// </summary>
+        public static string Action_Name_Cn {
+            get {
+                return ResourceManager.GetString("Action_Name_Cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action_Name_En.
+        /// </summary>
+        public static string Action_Name_En {
+            get {
+                return ResourceManager.GetString("Action_Name_En", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action_Name_Vi.
+        /// </summary>
+        public static string Action_Name_Vi {
+            get {
+                return ResourceManager.GetString("Action_Name_Vi", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
         public static string Amount {
@@ -138,6 +174,42 @@ namespace ManageAssets.Resources {
         public static string Content_VN {
             get {
                 return ResourceManager.GetString("Content_VN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Controller_ID.
+        /// </summary>
+        public static string Controller_ID {
+            get {
+                return ResourceManager.GetString("Controller_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Controller_Name_Cn.
+        /// </summary>
+        public static string Controller_Name_Cn {
+            get {
+                return ResourceManager.GetString("Controller_Name_Cn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Controller_Name_En.
+        /// </summary>
+        public static string Controller_Name_En {
+            get {
+                return ResourceManager.GetString("Controller_Name_En", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Controller_Name_Vi.
+        /// </summary>
+        public static string Controller_Name_Vi {
+            get {
+                return ResourceManager.GetString("Controller_Name_Vi", resourceCulture);
             }
         }
         

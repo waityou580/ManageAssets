@@ -14,11 +14,20 @@ namespace ManageAssets.Models
     
     public partial class Sys_Action
     {
-        public int Action_ID { get; set; }
-        public Nullable<int> Controller_ID { get; set; }
-        public string Action_Name { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Sys_Action()
+        {
+            this.Sys_GroupPermisionDetail = new HashSet<Sys_GroupPermisionDetail>();
+        }
+    
+        public string Action_ID { get; set; }
+        public string Controller_ID { get; set; }
         public string Action_Name_Vi { get; set; }
         public string Action_Name_En { get; set; }
         public string Action_Name_Cn { get; set; }
+    
+        public virtual Sys_Controller Sys_Controller { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sys_GroupPermisionDetail> Sys_GroupPermisionDetail { get; set; }
     }
 }
